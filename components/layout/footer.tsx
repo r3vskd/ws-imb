@@ -9,7 +9,7 @@ export function Footer() {
           <div>
             <h3 className="text-lg font-semibold">About Us</h3>
             <p className="mt-4 text-sm text-muted-foreground">
-              We are dedicated to providing exceptional real estate services, helping you find your perfect property.
+              Nos dedicamos a brindar servicios inmobiliarios excepcionales, ayudándole a encontrar su propiedad perfecta.
             </p>
           </div>
 

@@ -49,7 +49,7 @@ export default function HomePage() {
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: "url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/home%20v.jpg-rxnX7mys6JuAm5Bl56jYtHDucXciNT.jpeg')",
+            backgroundImage: "url('/ajVnNQ.jpg')",
           }}
         />
         <div className="absolute inset-0 bg-black/50" />
@@ -60,10 +60,12 @@ export default function HomePage() {
           className="relative container mx-auto px-4 text-center text-white"
         >
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            Enjoy The Finest Homes
+            La ciudad mas segura de México 
           </h1>
           <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Discover luxury living at its finest with our curated selection of premium properties
+            Propiedades en las mejores zonas de Mérida, con un excelente servicio al cliente. <br />
+            Merida Yucatan es una de las ciudades mas seguras del mundo, segun CEOWORLD Magazine.
+            
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-xl mx-auto">
             <Input
@@ -96,10 +98,10 @@ export default function HomePage() {
           </motion.h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { icon: Home, title: "Houses", count: 150 },
-              { icon: Building2, title: "Apartments", count: 120 },
+              { icon: Home, title: "Casas", count: 150 },
+              { icon: Building2, title: "Apartamentos", count: 120 },
               { icon: Building, title: "Villas", count: 80 },
-              { icon: Warehouse, title: "Commercial", count: 40 },
+              { icon: Warehouse, title: "Comerciales", count: 40 },
             ].map((category, index) => (
               <motion.div
                 key={index}
@@ -241,7 +243,7 @@ export default function HomePage() {
               className="relative"
             >
               <img
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/home%20v1.jpg-5s9E8GT21DqRpLZOgBx87fRzXIEkqn.jpeg"
+                src="/contract-hands.jpg"
                 alt="Real estate professionals shaking hands"
                 className="rounded-lg shadow-xl w-full h-[400px] object-cover"
               />

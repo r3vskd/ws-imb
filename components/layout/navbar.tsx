@@ -35,7 +35,7 @@ export function Navbar() {
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="flex items-center space-x-2">
             <Home className="h-6 w-6" />
-            <span className="font-bold text-xl">RealEstate</span>
+            <span className="font-bold text-xl">WS INMOBILIARA</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -44,13 +44,13 @@ export function Navbar() {
               onClick={() => scrollToSection("featured")}
               className="text-sm font-medium hover:text-primary transition-colors"
             >
-              Categories
+              Categorias
             </button>
             <button
               onClick={() => scrollToSection("properties")}
               className="text-sm font-medium hover:text-primary transition-colors"
             >
-              Properties
+              Propiedades
             </button>
             <button
               onClick={() => scrollToSection("expertise")}
@@ -62,9 +62,9 @@ export function Navbar() {
               onClick={() => scrollToSection("testimonials")}
               className="text-sm font-medium hover:text-primary transition-colors"
             >
-              Testimonials
+              Testimonios
             </button>
-            <Button>Contact Us</Button>
+            <Button>Contacto</Button>
           </div>
 
           {/* Mobile Navigation Toggle */}
@@ -85,13 +85,13 @@ export function Navbar() {
                 onClick={() => scrollToSection("featured")}
                 className="text-sm font-medium hover:text-primary transition-colors"
               >
-                Featured
+                Lo ultimo
               </button>
               <button
                 onClick={() => scrollToSection("properties")}
                 className="text-sm font-medium hover:text-primary transition-colors"
               >
-                Properties
+                Propiedades
               </button>
               <button
                 onClick={() => scrollToSection("expertise")}
@@ -105,7 +105,7 @@ export function Navbar() {
               >
                 Testimonials
               </button>
-              <Button className="w-full">Contact Us</Button>
+              <Button className="w-full">Contacto</Button>
             </div>
           </div>
         )}
