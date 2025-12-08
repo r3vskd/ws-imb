@@ -67,7 +67,9 @@ export function Navbar() {
             >
               Testimonios
             </button>
-            <Button className={cn(isScrolled ? "" : "text-white border-white")}>Contacto</Button>
+            <Button asChild className={cn(isScrolled ? "" : "text-white border-white")}>
+              <Link href="/contact">Contacto</Link>
+            </Button>
           </div>
 
           {/* Mobile Navigation Toggle */}
