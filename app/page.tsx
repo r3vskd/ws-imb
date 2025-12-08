@@ -50,9 +50,10 @@ export default function HomePage() {
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage: "url('/ajVnNQ.jpg')",
+
           }}
         />
-        <div className="absolute inset-0 bg-black/50" />
+        <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -60,21 +61,20 @@ export default function HomePage() {
           className="relative container mx-auto px-4 text-center text-white"
         >
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            La ciudad mas segura de México 
+            Encuentra tu propiedad con el mejor equipo de agentes inmobiliarios.
           </h1>
           <p className="text-xl mb-8 max-w-2xl mx-auto">
             Propiedades en las mejores zonas de Mérida, con un excelente servicio al cliente. <br />
-            Merida Yucatan es una de las ciudades mas seguras del mundo, segun CEOWORLD Magazine.
-            
+            Merida Yucatan es una de las ciudades mas seguras del mundo, segun la reconocida CEOWORLD Magazine y la mas segura de México.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-xl mx-auto">
             <Input
               type="text"
-              placeholder="Search by location..."
+              placeholder="Buscar por ubicacion"
               className="bg-white/90 text-black"
             />
             <Button size="lg" className="w-full sm:w-auto">
-              <Search className="mr-2 h-4 w-4" /> Search
+              <Search className="mr-2 h-4 w-4" /> Buscar
             </Button>
           </div>
         </motion.div>
@@ -94,14 +94,14 @@ export default function HomePage() {
             variants={fadeInUp}
             className="text-3xl font-bold text-center mb-12"
           >
-            Featured Categories
+            Categorias Destacadas
           </motion.h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               { icon: Home, title: "Casas", count: 150 },
-              { icon: Building2, title: "Apartamentos", count: 120 },
-              { icon: Building, title: "Villas", count: 80 },
-              { icon: Warehouse, title: "Comerciales", count: 40 },
+              { icon: Building2, title: "Departamentos", count: 120 },
+              { icon: Building, title: "Villas y Desarrollos", count: 80 },
+              { icon: Warehouse, title: "Locales Comerciales", count: 40 },
             ].map((category, index) => (
               <motion.div
                 key={index}
@@ -113,7 +113,7 @@ export default function HomePage() {
                   <CardContent className="p-6">
                     <category.icon className="w-12 h-12 mb-4 text-primary" />
                     <h3 className="text-xl font-semibold mb-2">{category.title}</h3>
-                    <p className="text-muted-foreground">{category.count} Properties</p>
+                    <p className="text-muted-foreground">{category.count} Propiedades</p>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -136,33 +136,33 @@ export default function HomePage() {
             variants={fadeInUp}
             className="text-3xl font-bold text-center mb-12"
           >
-            Featured Properties
+            Propiedades Destacadas
           </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
-                image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/home%20v5.jpg-T9OVKOsAOgLdaDgaUYCCqzfJDGvSKi.jpeg",
-                title: "Modern Minimalist Villa",
-                location: "Beverly Hills, CA",
-                price: "$4,500,000",
-                beds: 5,
-                baths: 4
+                image: "/ho1.jpg",
+                title: "Casa en Dzitya",
+                location: "Merida Yucatan",
+                price: "$2,600,000",
+                beds: 3,
+                baths: 2
               },
               {
-                image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/home%20v6.jpg-VAhHlKiqYrQxxjS6BMiSKo09zCxBi3.jpeg",
-                title: "Contemporary Luxury Estate",
-                location: "Hollywood Hills, CA",
-                price: "$6,900,000",
-                beds: 6,
-                baths: 5
+                image: "/ho2.jpg",
+                title: "Casa en Dzitya",
+                location: "Merida Yucatan",
+                price: "$2,231,000",
+                beds: 2,
+                baths: 2
               },
               {
-                image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/home%20v2.jpg-87OkF6xD9cEKaGu0C7lhG8DdvuL5p6.jpeg",
-                title: "Beachfront Paradise",
-                location: "Malibu, CA",
-                price: "$12,500,000",
-                beds: 7,
-                baths: 6
+                image: "/ho3.jpg",
+                title: "Casa en Dzitya",
+                location: "Merida Yucatan",
+                price: "$",
+                beds: 2,
+                baths: 2
               }
             ].map((property, index) => (
               <motion.div
@@ -179,7 +179,7 @@ export default function HomePage() {
                       className="w-full h-[300px] object-cover transition-transform group-hover:scale-110"
                     />
                     <div className="absolute top-4 left-4 bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm">
-                      Featured
+                      Destacada
                     </div>
                   </div>
                   <CardContent className="p-6">
@@ -204,7 +204,7 @@ export default function HomePage() {
                       </div>
                     </div>
                     <Button className="w-full group">
-                      View Details
+                      Ver detalles
                       <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
                     </Button>
                   </CardContent>
@@ -228,13 +228,13 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div variants={fadeInUp}>
               <h2 className="text-3xl font-bold mb-6">
-                Local expertise for luxury homes
+                Propiedades de lujo en zonas exclusivas
               </h2>
               <p className="text-lg text-muted-foreground mb-8">
-                Our team of experienced real estate professionals combines deep local market knowledge with expertise in luxury properties to help you find your perfect home.
+                Nuestro equipo de profesionales de la inmobiliaria combina conocimientos profundos del mercado local con experiencia en propiedades de lujo para ayudarte a encontrar tu hogar perfecto.
               </p>
               <Button size="lg" className="group">
-                Learn More
+                Ver más
                 <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
               </Button>
             </motion.div>
@@ -266,26 +266,32 @@ export default function HomePage() {
             variants={fadeInUp}
             className="text-3xl font-bold text-center mb-12"
           >
-            What Our Clients Say
+            Nuestros clientes
           </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
-                name: "Emma Thompson",
+                name: "Denisse Aznar",
                 role: "Homeowner",
-                quote: "RealEstate made finding our dream home an enjoyable experience. Their expertise and personalized approach exceeded our expectations.",
+                quote: "Excelente persona y como asesor inmobilario, la seriedad y profesionalismo con que realiza su trabajo por eso recomiendo ampliamente a Wendy Sanchez.",
                 stars: 5
               },
               {
-                name: "Michael Chen",
-                role: "Property Investor",
-                quote: "The market insights provided by RealEstate have significantly boosted my investment portfolio. Their professionalism is unmatched.",
-                stars: 5
-              },
-              {
-                name: "Sarah Miller",
+                name: "Pilar Patron",
                 role: "First-time Buyer",
-                quote: "As a first-time buyer, I was nervous about the process. RealEstate guided me every step of the way, making it smooth and stress-free.",
+                quote: "Excelente asesora, confiable, amable, realiza un filtro impecable al elegir al inquilino. Encantada con sus servicios.Gracias Wendy.",
+                stars: 5
+              },
+              {
+                name: "Eddie Ruiz",
+                role: "Homeowner",
+                quote: "Muy buena asesora, busco inquilinos muy buenos para mi propiedad, clara y te resuelve todo muy recomendada.",
+                stars: 5
+              },
+              {
+                name: "María Arcila",
+                role: "Homeowner",
+                quote: "Excelente asesora inmobiliaria!!!!, lo afirmo por experiencia; ella ha tenido por años la renta de mis propiedades en sus manos y siempre el resultado ha sido exitoso.",
                 stars: 5
               }
             ].map((testimonial, index) => (

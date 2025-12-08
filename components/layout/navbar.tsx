@@ -34,37 +34,40 @@ export function Navbar() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="flex items-center space-x-2">
-            <Home className="h-6 w-6" />
-            <span className="font-bold text-xl">WS INMOBILIARA</span>
+            {isScrolled ? (
+              <img src="/ws-logo-blue.png" alt="WS Inmobiliaria" className="h-12 w-auto"/>
+            ) : (
+              <img src="/ws-logo.png" alt="WS Inmobiliaria" className="h-12 w-auto"/>
+            )}
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             <button
               onClick={() => scrollToSection("featured")}
-              className="text-sm font-medium hover:text-primary transition-colors"
+              className={cn("text-sm font-medium transition-colors", isScrolled ? "text-black hover:text-primary" : "text-white hover:text-white/80")}
             >
               Categorias
             </button>
             <button
               onClick={() => scrollToSection("properties")}
-              className="text-sm font-medium hover:text-primary transition-colors"
+              className={cn("text-sm font-medium transition-colors", isScrolled ? "text-black hover:text-primary" : "text-white hover:text-white/80")}
             >
               Propiedades
             </button>
             <button
               onClick={() => scrollToSection("expertise")}
-              className="text-sm font-medium hover:text-primary transition-colors"
+              className={cn("text-sm font-medium transition-colors", isScrolled ? "text-black hover:text-primary" : "text-white hover:text-white/80")}
             >
               Expertise
             </button>
             <button
               onClick={() => scrollToSection("testimonials")}
-              className="text-sm font-medium hover:text-primary transition-colors"
+              className={cn("text-sm font-medium transition-colors", isScrolled ? "text-black hover:text-primary" : "text-white hover:text-white/80")}
             >
               Testimonios
             </button>
-            <Button>Contacto</Button>
+            <Button className={cn(isScrolled ? "" : "text-white border-white")}>Contacto</Button>
           </div>
 
           {/* Mobile Navigation Toggle */}
@@ -73,7 +76,11 @@ export function Navbar() {
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle menu"
           >
-            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            {isOpen ? (
+              <X className={cn("h-6 w-6", isScrolled ? "text-black" : "text-white")} />
+            ) : (
+              <Menu className={cn("h-6 w-6", isScrolled ? "text-black" : "text-white")} />
+            )}
           </button>
         </div>
 
@@ -83,25 +90,25 @@ export function Navbar() {
             <div className="flex flex-col space-y-4 px-4 py-6">
               <button
                 onClick={() => scrollToSection("featured")}
-                className="text-sm font-medium hover:text-primary transition-colors"
+                className={cn("text-sm font-medium transition-colors", isScrolled ? "text-black hover:text-primary" : "text-white hover:text-white/80")}
               >
                 Lo ultimo
               </button>
               <button
                 onClick={() => scrollToSection("properties")}
-                className="text-sm font-medium hover:text-primary transition-colors"
+                className={cn("text-sm font-medium transition-colors", isScrolled ? "text-black hover:text-primary" : "text-white hover:text-white/80")}
               >
                 Propiedades
               </button>
               <button
                 onClick={() => scrollToSection("expertise")}
-                className="text-sm font-medium hover:text-primary transition-colors"
+                className={cn("text-sm font-medium transition-colors", isScrolled ? "text-black hover:text-primary" : "text-white hover:text-white/80")}
               >
                 Expertise
               </button>
               <button
                 onClick={() => scrollToSection("testimonials")}
-                className="text-sm font-medium hover:text-primary transition-colors"
+                className={cn("text-sm font-medium transition-colors", isScrolled ? "text-black hover:text-primary" : "text-white hover:text-white/80")}
               >
                 Testimonials
               </button>
