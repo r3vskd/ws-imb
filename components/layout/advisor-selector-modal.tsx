@@ -70,7 +70,7 @@ export function AdvisorSelectorModal({
                   Wendy Sánchez 
                 </div>
                 <div className="text-xs text-muted-foreground">
-                  Asesora Inmobiliaria | Licenciada IMPI y especialista en Certeza Jurídica
+                  Asesora Inmobiliaria | Licenciada INAPIM y especialista en Certeza Jurídica
                 </div>
               </div>
             </div>
