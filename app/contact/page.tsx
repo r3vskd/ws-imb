@@ -63,7 +63,7 @@ export default function ContactPage() {
     setSending(true)
     setError(null)
     try {
-      const res = await fetch('https://formsubmit.co/contacto@wsinmobiliaria.com', {
+      const res = await fetch('https://formsubmit.co/contacto@wsinmobiliaria.com,software@wsinmobiliaria.com', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
