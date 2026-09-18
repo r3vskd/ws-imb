@@ -70,6 +70,12 @@ export default function HomePage() {
   })
 
   const handlePropertyWhatsApp = (property: Property) => {
+    trackMetaEvent('ViewContent', {
+      content_name: property.title,
+      content_type: 'product',
+      value: property.price,
+      currency: 'MXN',
+    })
     setSelectedProperty(property)
   }
 

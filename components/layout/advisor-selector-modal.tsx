@@ -29,7 +29,7 @@ export function AdvisorSelectorModal({
   const joseLuisUrl = 'https://wa.me/message/IUSRNTQEZ4HCN1'
 
   const handleSelectAdvisor = (advisorName: string, targetUrl: string) => {
-    trackMetaEvent('Lead', {
+    trackMetaEvent('Contact', {
       advisor: advisorName,
       property: propertyTitle || 'Consulta general',
       price: propertyPrice || 'N/A',

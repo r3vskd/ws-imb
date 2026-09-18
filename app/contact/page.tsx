@@ -56,13 +56,39 @@ export default function ContactPage() {
     },
   })
 
-  const onSubmit = (values: FormValues) => {
-    trackMetaEvent('Lead', {
-      content_name: 'Formulario de Contacto Web',
-      city: values.ciudad,
-      country: values.pais
-    })
-    setSubmitted(true)
+  const [sending, setSending] = React.useState(false)
+  const [error, setError] = React.useState<string | null>(null)
+
+  const onSubmit = async (values: FormValues) => {
+    setSending(true)
+    setError(null)
+    try {
+      const res = await fetch('https://formsubmit.co/contacto@wsinmobiliaria.com', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          nombre: values.nombre,
+          apellido: values.apellido,
+          telefono: values.telefono,
+          correo: values.correo,
+          mensaje: values.mensaje,
+          ciudad: values.ciudad,
+          pais: values.pais,
+          _subject: 'Nuevo lead desde wsinmobiliaria.com',
+        }),
+      })
+      if (!res.ok) throw new Error('Error al enviar')
+      trackMetaEvent('Lead', {
+        content_name: 'Formulario de Contacto Web',
+        city: values.ciudad,
+        country: values.pais
+      })
+      setSubmitted(true)
+    } catch {
+      setError('Hubo un error al enviar. Intenta de nuevo o contáctanos por WhatsApp.')
+    } finally {
+      setSending(false)
+    }
   }
 
   const handleOpenWhatsApp = () => {
@@ -210,9 +236,12 @@ export default function ContactPage() {
                 )}
               />
 
-              <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl h-12">
-                <Send className="w-4 h-4 mr-2" /> Enviar Formulario
+              <Button type="submit" disabled={sending} className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl h-12 disabled:opacity-50">
+                <Send className="w-4 h-4 mr-2" /> {sending ? 'Enviando...' : 'Enviar Formulario'}
               </Button>
+              {error && (
+                <p className="text-sm text-red-600 dark:text-red-400 text-center">{error}</p>
+              )}
             </form>
           </Form>
         )}
