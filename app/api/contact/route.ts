@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
     `
 
     await resend.emails.send({
-      from: 'WS Asesoría <onboarding@resend.dev>',
+      from: 'WS Asesoría Inmobiliaria <contacto@wsinmobiliaria.com>',
       to: ['contacto@wsinmobiliaria.com', 'software@wsinmobiliaria.com'],
       subject: `Nuevo lead: ${nombre} ${apellido} - ${ciudad}`,
       html,
