@@ -64,10 +64,11 @@ export default function HomePage() {
   const [expertiseRef, expertiseInView] = useInView({ triggerOnce: true, threshold: 0.1 })
   const [testimonialsRef, testimonialsInView] = useInView({ triggerOnce: true, threshold: 0.1 })
 
+  const featuredIds = ['WS038', 'WS047', 'WS051', 'WS052']
   const filteredProperties = REAL_PROPERTIES.filter(prop => {
-    const matchesFilter = filterType === 'Todos' || prop.type === filterType || prop.zone.toLowerCase().includes(filterType.toLowerCase())
-    const matchesSearch = searchQuery === '' || prop.title.toLowerCase().includes(searchQuery.toLowerCase()) || prop.zone.toLowerCase().includes(searchQuery.toLowerCase())
-    return matchesFilter && matchesSearch
+    if (!featuredIds.includes(prop.id)) return false
+    const matchesFilter = filterType === 'Todos' || prop.type === filterType
+    return matchesFilter
   })
 
   const handlePropertyWhatsApp = (property: Property) => {
@@ -367,20 +368,21 @@ export default function HomePage() {
               <motion.div
                 key={index}
                 variants={fadeInUp}
-                whileHover={{ y: -5 }}
+                whileHover={{ y: -4 }}
                 className="group"
               >
-                <Card className="overflow-hidden border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow h-full flex flex-col justify-between">
-                  <CardContent className="p-6">
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
-                      <category.icon className="w-6 h-6" />
+                <Card className="border-slate-200 dark:border-slate-800 rounded-2xl hover:shadow-lg transition-all duration-300 overflow-hidden">
+                  <CardContent className="p-8 text-center">
+                    <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-5 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                      <category.icon className="w-7 h-7" />
                     </div>
-                    <h3 className="text-xl font-bold mb-1 group-hover:text-primary transition-colors">{category.title}</h3>
+                    <h3 className="text-2xl font-bold mb-2">{category.title}</h3>
                     <p className="text-sm text-muted-foreground mb-4">{category.description}</p>
-                    <p className="text-sm font-semibold text-cta mb-4">{category.price}</p>
+                    <p className="text-lg font-bold text-cta mb-6">{category.price}</p>
                     <Button
                       asChild
-                      className="w-full bg-cta hover:bg-cta/90 text-white font-semibold"
+                      size="lg"
+                      className="w-full bg-cta hover:bg-cta/90 text-white font-semibold rounded-xl"
                     >
                       <Link href={`/propiedades?tipo=${category.title.toLowerCase()}`}>
                         <Search className="w-4 h-4 mr-2" />
@@ -527,7 +529,7 @@ export default function HomePage() {
         initial="hidden"
         animate={expertiseInView ? "visible" : "hidden"}
         variants={staggerContainer}
-        className="py-20 bg-gradient-to-b from-slate-900 to-primary/20 text-white"
+        className="py-20 bg-black text-white"
       >
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center mb-16">
@@ -687,8 +689,8 @@ export default function HomePage() {
                 credentials: ["Asesora Inmobiliaria Certificada", "Especialista en Renta Residencial", "Negociación y Cierre de Operaciones"]
               },
               {
-                name: "C.P. José Luis Peraza Peraza",
-                role: "Gerente / Asesor Inmobiliario",
+                name: "Lic. José Luis Peraza Peraza",
+                role: "Director General / Asesor Inmobiliario",
                 description: "Contador Público con enfoque en finanzas inmobiliarias. Gestión operativa y administrativa de operaciones de compra, venta y renta.",
                 credentials: ["Contador Público Certificado", "Gestión de Operaciones Inmobiliarias", "Análisis Financiero"]
               }
