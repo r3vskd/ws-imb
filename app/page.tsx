@@ -256,16 +256,8 @@ export default function HomePage() {
               variants={fadeInUp}
               className="relative"
             >
-              <div className="aspect-[4/3] rounded-2xl overflow-hidden bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
-                <div className="text-center p-8">
-                  <Home className="w-16 h-16 text-primary mx-auto mb-4" />
-                  <p className="text-lg font-medium text-muted-foreground">
-                    Imagen de propiedades en renta
-                  </p>
-                  <p className="text-sm text-muted-foreground/70 mt-2">
-                    (Placeholder - reemplazar con foto real)
-                  </p>
-                </div>
+              <div className="aspect-[4/3] rounded-2xl overflow-hidden">
+                <img src="/rentas-placeholder.jpg" alt="Propiedades en renta" className="w-full h-full object-cover" />
               </div>
             </motion.div>
           </div>
@@ -287,16 +279,8 @@ export default function HomePage() {
               variants={fadeInUp}
               className="order-2 lg:order-1"
             >
-              <div className="aspect-[4/3] rounded-2xl overflow-hidden bg-gradient-to-br from-secondary/20 to-primary/20 flex items-center justify-center">
-                <div className="text-center p-8">
-                  <Building2 className="w-16 h-16 text-secondary mx-auto mb-4" />
-                  <p className="text-lg font-medium text-muted-foreground">
-                    Imagen de propiedades en venta
-                  </p>
-                  <p className="text-sm text-muted-foreground/70 mt-2">
-                    (Placeholder - reemplazar con foto real)
-                  </p>
-                </div>
+              <div className="aspect-[4/3] rounded-2xl overflow-hidden">
+                <img src="/ventas-placeholder.jpg" alt="Propiedades en venta" className="w-full h-full object-cover" />
               </div>
             </motion.div>
 
@@ -372,6 +356,16 @@ export default function HomePage() {
                 className="group"
               >
                 <Card className="border-slate-200 dark:border-slate-800 rounded-2xl hover:shadow-lg transition-all duration-300 overflow-hidden">
+                  {category.title === "Rentas" && (
+                    <div className="h-40 overflow-hidden">
+                      <img src="/rentas-placeholder.jpg" alt="Rentas" className="w-full h-full object-cover" />
+                    </div>
+                  )}
+                  {category.title === "Ventas" && (
+                    <div className="h-40 overflow-hidden">
+                      <img src="/ventas-placeholder.jpg" alt="Ventas" className="w-full h-full object-cover" />
+                    </div>
+                  )}
                   <CardContent className="p-8 text-center">
                     <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-5 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
                       <category.icon className="w-7 h-7" />
@@ -448,7 +442,7 @@ export default function HomePage() {
                 <Card className="overflow-hidden border-slate-200 dark:border-slate-800 shadow-md flex flex-col w-full hover:shadow-xl transition-all duration-300">
                   <div className="relative h-60 overflow-hidden bg-slate-100 dark:bg-slate-800">
                     <img
-                      src={property.image}
+                      src={property.image || (property.type === 'Venta' ? '/ventas-placeholder.jpg' : '/rentas-placeholder.jpg')}
                       alt={property.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
@@ -786,8 +780,7 @@ export default function HomePage() {
           <motion.div variants={fadeInUp} className="mt-10">
             <Button 
               size="lg" 
-              variant="outline"
-              className="border-white text-white hover:bg-white/10"
+              className="bg-white text-black hover:bg-white/90 font-semibold"
               onClick={() => window.open('https://wa.me/529992284783', '_blank')}
             >
               <MessageCircle className="w-5 h-5 mr-2" />
