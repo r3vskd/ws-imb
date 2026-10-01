@@ -679,14 +679,14 @@ export default function HomePage() {
               {
                 name: "Lic. Wendy Guadalupe Sánchez Villalobos",
                 role: "Directora General / Asesora Inmobiliaria",
-                description: "Más de 10 años de experiencia en el mercado inmobiliario de Mérida. Especialista en rentas y relaciones a largo plazo con propietarios.",
-                credentials: ["Asesora Inmobiliaria Certificada", "Especialista en Renta Residencial", "Negociación y Cierre de Operaciones"]
+                description: "Más de 6 años de experiencia en el mercado inmobiliario de Mérida. Especialista en rentas y relaciones a largo plazo con propietarios.",
+                credentials: ["Asesora Inmobiliaria Certificada", "Especialista en Renta y VentaResidencial", "Cierre de Operaciones"]
               },
               {
                 name: "Lic. José Luis Peraza Peraza",
                 role: "Director General / Asesor Inmobiliario",
                 description: "Contador Público con enfoque en finanzas inmobiliarias. Gestión operativa y administrativa de operaciones de compra, venta y renta.",
-                credentials: ["Contador Público Certificado", "Gestión de Operaciones Inmobiliarias", "Análisis Financiero"]
+                credentials: ["Contador Público", "Gestión de Operaciones Inmobiliarias y Negociación", "Análisis Financiero"]
               }
             ].map((member, index) => (
               <motion.div
