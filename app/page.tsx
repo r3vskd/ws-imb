@@ -82,7 +82,7 @@ export default function HomePage() {
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <Navbar />
 
       {/* Hero Section */}
@@ -535,13 +535,8 @@ export default function HomePage() {
             </motion.p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {[
-              {
-                icon: BadgeCheck,
-                title: "Licencia INAPIM",
-                description: "Contamos con licencia inmobiliaria del Instituto Nacional de la Propiedad Inmobiliaria, respaldando la legalidad de cada operación."
-              },
               {
                 icon: ShieldCheck,
                 title: "Certeza Jurídica",
@@ -550,7 +545,7 @@ export default function HomePage() {
               {
                 icon: Award,
                 title: "Experiencia Comprobada",
-                description: "Más de 10 años asesorando a propietarios e inversionistas en el mercado inmobiliario de Mérida."
+                description: "Más de 6 años asesorando a propietarios e inversionistas en el mercado inmobiliario de Mérida."
               },
               {
                 icon: CheckCircle2,
@@ -684,7 +679,7 @@ export default function HomePage() {
               },
               {
                 name: "Lic. José Luis Peraza Peraza",
-                role: "Director General / Asesor Inmobiliario",
+                role: "Director De Finanzas Y Operaciones / Asesor Inmobiliario",
                 description: "Contador Público con enfoque en finanzas inmobiliarias. Gestión operativa y administrativa de operaciones de compra, venta y renta.",
                 credentials: ["Contador Público", "Gestión de Operaciones Inmobiliarias y Negociación", "Análisis Financiero"]
               }
@@ -699,7 +694,7 @@ export default function HomePage() {
                     <div className="flex items-start gap-6">
                       <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center flex-shrink-0">
                         <span className="text-3xl font-bold text-primary">
-                          {member.name.split(' ').slice(-1)[0].charAt(0)}
+                          {member.name.includes('Wendy') ? 'W' : member.name.includes('José') ? 'J' : member.name.split(' ').slice(-1)[0].charAt(0)}
                         </span>
                       </div>
                       <div className="flex-1">
