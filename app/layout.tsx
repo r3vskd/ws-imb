@@ -1,14 +1,22 @@
 import type { Metadata } from 'next'
-import { Plus_Jakarta_Sans } from 'next/font/google'
+import { Poppins, Josefin_Sans } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { MetaPixel } from '@/components/analytics/meta-pixel'
 import { WhatsAppButton } from '@/components/layout/whatsapp-button'
 import './globals.css'
 
-const plusJakartaSans = Plus_Jakarta_Sans({
+const poppins = Poppins({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700', '800'],
+  weight: ['400', '500', '600', '700'],
   display: 'swap',
+  variable: '--font-poppins',
+})
+
+const josefinSans = Josefin_Sans({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  display: 'swap',
+  variable: '--font-josefin',
 })
 
 export const metadata: Metadata = {
@@ -27,7 +35,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className="scroll-smooth">
-      <body className={`${plusJakartaSans.className} font-sans antialiased bg-background text-foreground selection:bg-blue-600 selection:text-white`}>
+      <body className={`${josefinSans.variable} ${poppins.variable} font-sans antialiased bg-background text-foreground selection:bg-teal-600 selection:text-white`}>
         <MetaPixel />
         {children}
         <WhatsAppButton />

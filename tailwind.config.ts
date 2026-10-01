@@ -43,6 +43,7 @@ const config: Config = {
           DEFAULT: 'hsl(var(--destructive))',
           foreground: 'hsl(var(--destructive-foreground))',
         },
+        cta: '#0369A1',
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
@@ -63,6 +64,10 @@ const config: Config = {
           border: 'hsl(var(--sidebar-border))',
           ring: 'hsl(var(--sidebar-ring))',
         },
+      },
+      fontFamily: {
+        sans: ['var(--font-josefin)', 'sans-serif'],
+        heading: ['var(--font-poppins)', 'sans-serif'],
       },
       borderRadius: {
         lg: 'var(--radius)',

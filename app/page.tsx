@@ -48,6 +48,7 @@ const staggerContainer = {
   }
 }
 
+import Link from "next/link"
 import { AdvisorSelectorModal } from "@/components/layout/advisor-selector-modal"
 
 export default function HomePage() {
@@ -127,6 +128,217 @@ export default function HomePage() {
         </motion.div>
       </motion.section>
 
+      {/* Servicios Section */}
+      <motion.section
+        id="servicios"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={staggerContainer}
+        className="py-20 bg-white dark:bg-slate-900"
+      >
+        <div className="container mx-auto px-4">
+          <motion.div variants={fadeInUp} className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+              Nuestros Servicios
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Acompañamiento profesional en cada etapa de tu operación inmobiliaria.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                icon: Search,
+                title: "Compra",
+                description: "Te ayudamos a encontrar la propiedad ideal según tus necesidades y presupuesto. Análisis de mercado, visitas y negociación incluidas."
+              },
+              {
+                icon: Building2,
+                title: "Venta",
+                description: "Estrategia de comercialización, promoción profesional, filtro de prospectos y seguimiento hasta el cierre de la operación."
+              },
+              {
+                icon: Home,
+                title: "Renta",
+                description: "Publicación, filtrado de candidatos, revisión documental, contrato y acompañamiento durante toda la relación de arrendamiento."
+              },
+              {
+                icon: Award,
+                title: "Opinión de Valor",
+                description: "Estimación profesional del valor de tu propiedad basada en análisis de mercado comparativo y condiciones actuales."
+              },
+              {
+                icon: Building,
+                title: "Comercialización",
+                description: "Promoción integral de tu propiedad en portales inmobiliarios, redes sociales y nuestra base de datos calificada."
+              },
+              {
+                icon: ShieldCheck,
+                title: "Asesoría Integral",
+                description: "Revisión documental, acompañamiento jurídico, inventario de entrega y seguimiento post-operación."
+              }
+            ].map((service, index) => (
+              <motion.div
+                key={index}
+                variants={fadeInUp}
+                whileHover={{ y: -5 }}
+                className="group"
+              >
+                <Card className="h-full border-slate-200 dark:border-slate-800 hover:border-primary/30 transition-all duration-300 hover:shadow-lg">
+                  <CardContent className="p-8">
+                    <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                      <service.icon className="w-7 h-7" />
+                    </div>
+                    <h3 className="text-xl font-bold mb-3">{service.title}</h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      {service.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Quiero Rentar mi Propiedad */}
+      <motion.section
+        id="rentar"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={staggerContainer}
+        className="py-20 bg-slate-50 dark:bg-slate-900/50"
+      >
+        <div className="container mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <motion.div variants={fadeInUp}>
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">
+                ¿Quieres rentar tu propiedad?
+              </h2>
+              <p className="text-muted-foreground mb-8 leading-relaxed">
+                En WS no solo publicamos tu propiedad. Nos encargamos de todo el proceso 
+                para que tú solo disfrutes de los beneficios.
+              </p>
+
+              <div className="space-y-4">
+                {[
+                  "Asesoría inicial y estimación de valor",
+                  "Promoción profesional en portales y redes",
+                  "Filtro y calificación de prospectos",
+                  "Revisión documental y verificación",
+                  "Elaboración de contrato de arrendamiento",
+                  "Inventario de entrega y acompañamiento",
+                  "Seguimiento durante toda la relación",
+                  "Acompañamiento jurídico cuando corresponde"
+                ].map((step, index) => (
+                  <div key={index} className="flex items-start gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                    <span className="text-foreground">{step}</span>
+                  </div>
+                ))}
+              </div>
+
+              <Button 
+                size="lg" 
+                className="mt-8 bg-cta hover:bg-cta/90 text-white"
+                onClick={() => window.open('https://wa.me/529992284783?text=Hola%20Wendy%2C%20quiero%20rentar%20mi%20propiedad', '_blank')}
+              >
+                <MessageCircle className="w-5 h-5 mr-2" />
+                Rentar mi propiedad
+              </Button>
+            </motion.div>
+
+            <motion.div
+              variants={fadeInUp}
+              className="relative"
+            >
+              <div className="aspect-[4/3] rounded-2xl overflow-hidden bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
+                <div className="text-center p-8">
+                  <Home className="w-16 h-16 text-primary mx-auto mb-4" />
+                  <p className="text-lg font-medium text-muted-foreground">
+                    Imagen de propiedades en renta
+                  </p>
+                  <p className="text-sm text-muted-foreground/70 mt-2">
+                    (Placeholder - reemplazar con foto real)
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Quiero Vender mi Propiedad */}
+      <motion.section
+        id="vender"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={staggerContainer}
+        className="py-20 bg-white dark:bg-slate-900"
+      >
+        <div className="container mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+              variants={fadeInUp}
+              className="order-2 lg:order-1"
+            >
+              <div className="aspect-[4/3] rounded-2xl overflow-hidden bg-gradient-to-br from-secondary/20 to-primary/20 flex items-center justify-center">
+                <div className="text-center p-8">
+                  <Building2 className="w-16 h-16 text-secondary mx-auto mb-4" />
+                  <p className="text-lg font-medium text-muted-foreground">
+                    Imagen de propiedades en venta
+                  </p>
+                  <p className="text-sm text-muted-foreground/70 mt-2">
+                    (Placeholder - reemplazar con foto real)
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div variants={fadeInUp} className="order-1 lg:order-2">
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">
+                ¿Quieres vender tu propiedad?
+              </h2>
+              <p className="text-muted-foreground mb-8 leading-relaxed">
+                Desarrollamos una estrategia de comercialización personalizada para 
+                obtener el mejor valor por tu propiedad.
+              </p>
+
+              <div className="space-y-4">
+                {[
+                  "Estrategia de comercialización personalizada",
+                  "Estimación profesional de valor",
+                  "Promoción en portales inmobiliarios y redes",
+                  "Fotografía profesional y recorrido virtual",
+                  "Atención y filtro de prospectos calificados",
+                  "Revisión documental y verificación de fondos",
+                  "Seguimiento de la operación hasta el cierre",
+                  "Acompañamiento jurídico integral"
+                ].map((step, index) => (
+                  <div key={index} className="flex items-start gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0" />
+                    <span className="text-foreground">{step}</span>
+                  </div>
+                ))}
+              </div>
+
+              <Button 
+                size="lg" 
+                className="mt-8 bg-cta hover:bg-cta/90 text-white"
+                onClick={() => window.open('https://wa.me/529992284783?text=Hola%20Wendy%2C%20quiero%20vender%20mi%20propiedad', '_blank')}
+              >
+                <MessageCircle className="w-5 h-5 mr-2" />
+                Vender mi propiedad
+              </Button>
+            </motion.div>
+          </div>
+        </div>
+      </motion.section>
+
       {/* Featured Categories */}
       <motion.section
         id="featured"
@@ -147,12 +359,10 @@ export default function HomePage() {
             Explora las mejores opciones de inversión patrimonial en el norte y poniente estratégico de Mérida.
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
             {[
-              { icon: Home, title: "Casas en venta y renta", zone: "Distintas zonas de Mérida", count: "En venta desde $2M", count2: "En renta accesibles desde $9,000/mes" },
-              { icon: Building2, title: "Departamentos en venta y renta", zone: "Norte Mérida", count: "En venta desde $2.5M", count2: "En renta accesibles desde $5,000/mes" },
-              { icon: Building, title: "Townhouses", zone: "Norte Mérida", count: "Desde $3.1M" },
-              { icon: Warehouse, title: "Naves Industriales, Locales y Terrenos", zone: "Yucatán", count: "En venta desde $1.6M", count2: "En renta desde $13,000/mes" },
+              { icon: Home, title: "Ventas", description: "Casas, departamentos, townhouses y más", price: "Desde $2M MXN" },
+              { icon: Building2, title: "Rentas", description: "Propiedades en renta para vivir o invertir", price: "Desde $5,000 MXN/mes" },
             ].map((category, index) => (
               <motion.div
                 key={index}
@@ -162,21 +372,21 @@ export default function HomePage() {
               >
                 <Card className="overflow-hidden border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow h-full flex flex-col justify-between">
                   <CardContent className="p-6">
-                    <div className="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-950 flex items-center justify-center mb-4 text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform">
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
                       <category.icon className="w-6 h-6" />
                     </div>
-                    <h3 className="text-xl font-bold mb-1 group-hover:text-blue-600 transition-colors">{category.title}</h3>
-                    <p className="text-sm text-muted-foreground mb-3">{category.zone}</p>
-                    <div className="flex flex-wrap gap-2 mt-auto">
-                      <span className="inline-block text-xs font-semibold px-2.5 py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-md">
-                        {category.count}
-                      </span>
-                      {category.count2 && (
-                        <span className="inline-block text-xs font-semibold px-2.5 py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-md">
-                          {category.count2}
-                        </span>
-                      )}
-                    </div>
+                    <h3 className="text-xl font-bold mb-1 group-hover:text-primary transition-colors">{category.title}</h3>
+                    <p className="text-sm text-muted-foreground mb-4">{category.description}</p>
+                    <p className="text-sm font-semibold text-cta mb-4">{category.price}</p>
+                    <Button
+                      asChild
+                      className="w-full bg-cta hover:bg-cta/90 text-white font-semibold"
+                    >
+                      <Link href={`/propiedades?tipo=${category.title.toLowerCase()}`}>
+                        <Search className="w-4 h-4 mr-2" />
+                        Buscar catálogo
+                      </Link>
+                    </Button>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -213,7 +423,11 @@ export default function HomePage() {
                   variant={filterType === type ? 'default' : 'outline'}
                   size="sm"
                   onClick={() => setFilterType(type)}
-                  className="rounded-full font-medium"
+                  className={`rounded-full font-medium transition-all duration-200 ${
+                    filterType === type 
+                      ? 'bg-primary text-white hover:bg-primary/90' 
+                      : 'border-primary/30 text-primary hover:bg-primary/10'
+                  }`}
                 >
                   {type}
                 </Button>
@@ -313,15 +527,15 @@ export default function HomePage() {
         initial="hidden"
         animate={expertiseInView ? "visible" : "hidden"}
         variants={staggerContainer}
-        className="py-20 bg-slate-900 text-white"
+        className="py-20 bg-gradient-to-b from-slate-900 to-primary/20 text-white"
       >
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center mb-16">
             <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold mb-4">
-              ¿Por qué asesorarte con WS Asesoría Inmobiliaria?
+              ¿Por qué asesorarte con WS?
             </motion.h2>
-            <motion.p variants={fadeInUp} className="text-slate-400 leading-relaxed">
-              No solo publicamos propiedades; filtramos prospectos de manera metódica y rigurosa, verificamos la certeza Legal y Jurídica del patrimonio, contamos con un equipo legal especializado, acompañamos todo el proceso formal con notaría y estándares éticos.
+            <motion.p variants={fadeInUp} className="text-slate-300 leading-relaxed">
+              No solo publicamos propiedades; construimos relaciones de confianza con un servicio integral, transparente y profesional.
             </motion.p>
           </div>
 
@@ -329,35 +543,36 @@ export default function HomePage() {
             {[
               {
                 icon: BadgeCheck,
-                title: "Licencia Inmobiliaria",
-                description: "Somos una de las primeras inmobiliarias del país en contar con licencia inmobiliaria del IMPI, Instituto Mexicano de la Propiedad Industrial."
+                title: "Licencia INAPIM",
+                description: "Contamos con licencia inmobiliaria del Instituto Nacional de la Propiedad Inmobiliaria, respaldando la legalidad de cada operación."
               },
               {
                 icon: ShieldCheck,
-                title: "Certeza Jurídica Rigurosa",
-                description: "Revisión documental exhaustiva bajo la norma NOM-247-SE-2021 para garantizar operaciones seguras."
+                title: "Certeza Jurídica",
+                description: "Revisión documental exhaustiva de cada propiedad para garantizar operaciones seguras sin sorpresas."
               },
               {
                 icon: Award,
-                title: "Respaldo e Integración INAPIM",
-                description: "Dirección de capacitaciones en INAPIM 2026, respaldando un servicio informado y profesional."
+                title: "Experiencia Comprobada",
+                description: "Más de 10 años asesorando a propietarios e inversionistas en el mercado inmobiliario de Mérida."
               },
               {
                 icon: CheckCircle2,
-                title: "Filtrado y Protección Patrimonial",
-                description: "Protegemos a propietarios y compradores verificando capacidad legal y financiera sin falsas promesas."
+                title: "Filtrado Riguroso",
+                description: "Evaluamos la capacidad legal y financiera de cada prospecto para proteger el patrimonio de nuestros clientes."
               },
-
             ].map((item, idx) => (
               <motion.div
                 key={idx}
                 variants={fadeInUp}
                 whileHover={{ y: -4 }}
                 transition={{ duration: 0.2 }}
-                className="group bg-slate-800/60 hover:bg-slate-800/90 p-6 rounded-2xl border border-slate-700/50 hover:border-slate-600 backdrop-blur flex flex-col justify-between transition-colors duration-200 cursor-pointer"
+                className="group bg-white/10 hover:bg-white/15 p-6 rounded-2xl border border-white/10 hover:border-primary/50 backdrop-blur-sm flex flex-col justify-between transition-all duration-300"
               >
                 <div>
-                  <item.icon className="w-10 h-10 text-blue-400 mb-4 group-hover:scale-105 transition-transform duration-200" />
+                  <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center mb-4 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                    <item.icon className="w-6 h-6 text-primary group-hover:text-white" />
+                  </div>
                   <h3 className="text-xl font-bold mb-3">{item.title}</h3>
                   <p className="text-sm text-slate-300 leading-relaxed">{item.description}</p>
                 </div>
@@ -374,13 +589,13 @@ export default function HomePage() {
         initial="hidden"
         animate={testimonialsInView ? "visible" : "hidden"}
         variants={staggerContainer}
-        className="py-20 bg-slate-50 dark:bg-slate-900/30"
+        className="py-20 bg-gradient-to-b from-slate-50 to-white dark:from-slate-900/30 dark:to-slate-900"
       >
         <div className="container mx-auto px-4 max-w-5xl text-center">
-          <motion.h2 variants={fadeInUp} className="text-3xl font-bold mb-3 tracking-tight">
-            Lo que dicen nuestros clientes de Wendy Sánchez
+          <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold mb-4 tracking-tight">
+            Lo que dicen nuestros clientes
           </motion.h2>
-          <motion.p variants={fadeInUp} className="text-muted-foreground mb-12 max-w-xl mx-auto text-sm">
+          <motion.p variants={fadeInUp} className="text-muted-foreground mb-12 max-w-xl mx-auto">
             Experiencias reales de propietarios y compradores atendidos con seriedad, transparencia y filtrado riguroso.
           </motion.p>
           
@@ -388,29 +603,38 @@ export default function HomePage() {
             {[
               {
                 name: "Denisse Aznar",
-                role: "Homeowner / Propietaria",
-                comment: "Excelente persona y como asesor inmobilario, la seriedad y profesionalismo con que realiza su trabajo por eso recomiendo ampliamente a Wendy Sanchez."
+                role: "Propietaria",
+                comment: "Excelente persona y como asesora inmobiliaria, la seriedad y profesionalismo con que realiza su trabajo por eso recomiendo ampliamente a Wendy Sánchez.",
+                color: "bg-primary/10 text-primary"
               },
               {
-                name: "Pilar Patron",
-                role: "First-time Buyer",
-                comment: "Excelente asesora, confiable, amable, realiza un filtro impecable al elegir al inquilino. Encantada con sus servicios. Gracias Wendy."
+                name: "Pilar Patrón",
+                role: "Compradora",
+                comment: "Excelente asesora, confiable, amable, realiza un filtro impecable al elegir al inquilino. Encantada con sus servicios. Gracias Wendy.",
+                color: "bg-secondary/10 text-secondary"
               },
               {
                 name: "Eddie Ruiz",
-                role: "Homeowner / Propietario",
-                comment: "Muy buena asesora, busco inquilinos muy buenos para mi propiedad, clara y te resuelve todo muy recomendada."
+                role: "Propietario",
+                comment: "Muy buena asesora, buscó inquilinos muy buenos para mi propiedad, clara y te resuelve todo. Muy recomendada.",
+                color: "bg-cta/10 text-cta"
               },
               {
                 name: "María Arcila",
-                role: "Homeowner / Cliente Frecuente",
-                comment: "Excelente asesora inmobiliaria!!!!, lo afirmo por experiencia; ella ha tenido por años la renta de mis propiedades en sus manos y siempre el resultado ha sido exitoso."
+                role: "Cliente Frecuente",
+                comment: "Excelente asesora inmobiliaria, lo afirmo por experiencia; ella ha tenido por años la renta de mis propiedades en sus manos y siempre el resultado ha sido exitoso.",
+                color: "bg-primary/10 text-primary"
               }
             ].map((item, index) => (
-              <motion.div key={index} variants={fadeInUp}>
-                <Card className="p-6 border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow h-full flex flex-col justify-between">
+              <motion.div 
+                key={index} 
+                variants={fadeInUp}
+                whileHover={{ y: -4 }}
+                transition={{ duration: 0.2 }}
+              >
+                <Card className="p-6 border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all duration-300 h-full flex flex-col justify-between">
                   <div>
-                    <div className="flex items-center gap-1 mb-3 text-amber-400">
+                    <div className="flex items-center gap-1 mb-4 text-amber-400">
                       {[...Array(5)].map((_, i) => (
                         <Star key={i} className="w-4 h-4 fill-current" />
                       ))}
@@ -419,19 +643,155 @@ export default function HomePage() {
                       "{item.comment}"
                     </p>
                   </div>
-                  <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                  <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center gap-3">
+                    <div className={`w-10 h-10 rounded-full ${item.color} flex items-center justify-center font-bold text-sm`}>
+                      {item.name.charAt(0)}
+                    </div>
                     <div>
                       <div className="font-bold text-sm text-slate-900 dark:text-slate-100">{item.name}</div>
-                      <div className="text-xs text-blue-600 dark:text-blue-400 font-medium">{item.role}</div>
-                    </div>
-                    <div className="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center text-blue-600 dark:text-blue-300 font-bold text-xs">
-                      {item.name.charAt(0)}
+                      <div className="text-xs text-muted-foreground">{item.role}</div>
                     </div>
                   </div>
                 </Card>
               </motion.div>
             ))}
           </div>
+        </div>
+      </motion.section>
+
+      {/* Equipo Section */}
+      <motion.section
+        id="equipo"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={staggerContainer}
+        className="py-20 bg-white dark:bg-slate-900"
+      >
+        <div className="container mx-auto px-4">
+          <motion.div variants={fadeInUp} className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+              Nuestro Equipo
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Profesionales comprometidos con la excelencia y la confianza de nuestros clientes.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {[
+              {
+                name: "Lic. Wendy Guadalupe Sánchez Villalobos",
+                role: "Directora General / Asesora Inmobiliaria",
+                description: "Más de 10 años de experiencia en el mercado inmobiliario de Mérida. Especialista en rentas y relaciones a largo plazo con propietarios.",
+                credentials: ["Asesora Inmobiliaria Certificada", "Especialista en Renta Residencial", "Negociación y Cierre de Operaciones"]
+              },
+              {
+                name: "C.P. José Luis Peraza Peraza",
+                role: "Gerente / Asesor Inmobiliario",
+                description: "Contador Público con enfoque en finanzas inmobiliarias. Gestión operativa y administrativa de operaciones de compra, venta y renta.",
+                credentials: ["Contador Público Certificado", "Gestión de Operaciones Inmobiliarias", "Análisis Financiero"]
+              }
+            ].map((member, index) => (
+              <motion.div
+                key={index}
+                variants={fadeInUp}
+                whileHover={{ y: -5 }}
+              >
+                <Card className="h-full border-slate-200 dark:border-slate-800 hover:shadow-lg transition-all duration-300">
+                  <CardContent className="p-8">
+                    <div className="flex items-start gap-6">
+                      <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center flex-shrink-0">
+                        <span className="text-3xl font-bold text-primary">
+                          {member.name.split(' ').slice(-1)[0].charAt(0)}
+                        </span>
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-xl font-bold mb-1">{member.name}</h3>
+                        <p className="text-primary text-sm font-medium mb-3">{member.role}</p>
+                        <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
+                          {member.description}
+                        </p>
+                        <div className="flex flex-wrap gap-2">
+                          {member.credentials.map((cred, i) => (
+                            <span key={i} className="text-xs px-3 py-1 bg-primary/10 text-primary rounded-full">
+                              {cred}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </motion.section>
+
+      {/* CTA Final */}
+      <motion.section
+        id="contacto"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={staggerContainer}
+        className="py-20 bg-black"
+      >
+        <div className="container mx-auto px-4 text-center">
+          <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold text-white mb-6">
+            ¿Listo para empezar?
+          </motion.h2>
+          <motion.p variants={fadeInUp} className="text-white/90 max-w-2xl mx-auto mb-10 text-lg">
+            Contáctanos hoy y recibe asesoría personalizada para tu operación inmobiliaria.
+          </motion.p>
+
+          <motion.div variants={fadeInUp} className="flex flex-wrap justify-center gap-4">
+            <Button 
+              size="lg" 
+              className="bg-white text-primary hover:bg-white/90 font-semibold"
+              onClick={() => window.open('https://wa.me/529992284783?text=Hola%20Wendy%2C%20quiero%20comprar%20una%20propiedad', '_blank')}
+            >
+              <Home className="w-5 h-5 mr-2" />
+              Comprar
+            </Button>
+            <Button 
+              size="lg" 
+              className="bg-white text-primary hover:bg-white/90 font-semibold"
+              onClick={() => window.open('https://wa.me/529992284783?text=Hola%20Wendy%2C%20quiero%20rentar%20una%20propiedad', '_blank')}
+            >
+              <Building2 className="w-5 h-5 mr-2" />
+              Rentar
+            </Button>
+            <Button 
+              size="lg" 
+              className="bg-white text-primary hover:bg-white/90 font-semibold"
+              onClick={() => window.open('https://wa.me/529992284783?text=Hola%20Wendy%2C%20quiero%20vender%20mi%20propiedad', '_blank')}
+            >
+              <Building className="w-5 h-5 mr-2" />
+              Vender
+            </Button>
+            <Button 
+              size="lg" 
+              className="bg-white text-primary hover:bg-white/90 font-semibold"
+              onClick={() => window.open('https://wa.me/529992284783?text=Hola%20Wendy%2C%20quiero%20rentar%20mi%20propiedad', '_blank')}
+            >
+              <Warehouse className="w-5 h-5 mr-2" />
+              Rentar mi propiedad
+            </Button>
+          </motion.div>
+
+          <motion.div variants={fadeInUp} className="mt-10">
+            <Button 
+              size="lg" 
+              variant="outline"
+              className="border-white text-white hover:bg-white/10"
+              onClick={() => window.open('https://wa.me/529992284783', '_blank')}
+            >
+              <MessageCircle className="w-5 h-5 mr-2" />
+              Contactar a Wendy
+            </Button>
+          </motion.div>
         </div>
       </motion.section>
 
