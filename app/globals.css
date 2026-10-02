@@ -106,3 +106,50 @@
     transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
   }
 }
+
+/* ===== Dark mode: fondo uniforme azul-negro granulado ===== */
+html.dark {
+  background-color: #04070e;
+  background-image: radial-gradient(130% 100% at 50% 0%, #101a30 0%, #0a1222 40%, #060a14 75%, #04070e 100%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.dark body {
+  background: transparent;
+}
+
+.dark body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.dark .min-h-screen.bg-background {
+  background-color: transparent;
+}
+
+.dark section {
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+.dark section.sticky {
+  background-color: rgba(5, 9, 18, 0.85) !important;
+}
+
+.dark footer {
+  background-color: transparent;
+}
+
+.dark .bg-card {
+  background-color: rgba(0, 0, 0, 0.55);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border-color: rgba(255, 255, 255, 0.08);
+}
