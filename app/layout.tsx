@@ -3,6 +3,7 @@ import { Poppins, Josefin_Sans } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { MetaPixel } from '@/components/analytics/meta-pixel'
 import { WhatsAppButton } from '@/components/layout/whatsapp-button'
+import { ThemeProvider } from '@/components/theme-provider'
 import './globals.css'
 
 const poppins = Poppins({
@@ -34,12 +35,14 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="es" className="scroll-smooth">
+    <html lang="es" className="scroll-smooth" suppressHydrationWarning>
       <body className={`${josefinSans.variable} ${poppins.variable} font-sans antialiased bg-background text-foreground selection:bg-teal-600 selection:text-white`}>
-        <MetaPixel />
-        {children}
-        <WhatsAppButton />
-        <Analytics />
+        <ThemeProvider attribute={['class', 'data-theme']} defaultTheme="system" enableSystem>
+          <MetaPixel />
+          {children}
+          <WhatsAppButton />
+          <Analytics />
+        </ThemeProvider>
       </body>
     </html>
   )
