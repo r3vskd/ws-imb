@@ -49,9 +49,11 @@ const staggerContainer = {
 }
 
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { AdvisorSelectorModal } from "@/components/layout/advisor-selector-modal"
 
 export default function HomePage() {
+  const router = useRouter()
   const { scrollYProgress } = useScroll()
   const heroScale = useTransform(scrollYProgress, [0, 0.5], [1, 1.05])
 
@@ -79,6 +81,17 @@ export default function HomePage() {
       currency: 'MXN',
     })
     setSelectedProperty(property)
+  }
+
+  const handleHeroSearch = () => {
+    const q = searchQuery.trim()
+    if (q) {
+      trackMetaEvent('Search', { search_string: q })
+    }
+    const params = new URLSearchParams()
+    params.set('tipo', 'ventas')
+    if (q) params.set('q', q)
+    router.push(`/propiedades?${params.toString()}`)
   }
 
   return (
@@ -114,7 +127,10 @@ export default function HomePage() {
             Mérida Yucatán es una de las ciudades más seguras del mundo, según la reconocida CEOWORLD Magazine y la más segura de México.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-xl mx-auto bg-white/10 p-2 rounded-2xl backdrop-blur-md border border-white/20">
+          <form
+            onSubmit={(e) => { e.preventDefault(); handleHeroSearch() }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-xl mx-auto bg-white/10 p-2 rounded-2xl backdrop-blur-md border border-white/20"
+          >
             <Input
               type="text"
               placeholder="Buscar por zona (ej. Dzityá, Tixcacal, Temozón)..."
@@ -122,10 +138,10 @@ export default function HomePage() {
               onChange={(e) => setSearchQuery(e.target.value)}
               className="bg-white/90 text-slate-900 border-none h-12 text-base rounded-xl focus-visible:ring-2 focus-visible:ring-blue-500"
             />
-            <Button size="lg" className="w-full sm:w-auto h-12 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl px-8 shadow-lg">
+            <Button type="submit" size="lg" className="w-full sm:w-auto h-12 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl px-8 shadow-lg">
               <Search className="mr-2 h-5 w-5" /> Buscar
             </Button>
-          </div>
+          </form>
         </motion.div>
       </motion.section>
 

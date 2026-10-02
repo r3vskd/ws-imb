@@ -60,6 +60,9 @@ const staggerContainer = {
 
 const PROPERTIES_PER_PAGE = 9
 
+const normalizeText = (text: string) =>
+  text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+
 function PropertyCard({ property, index }: { property: Property; index: number }) {
   const [selectedProperty, setSelectedProperty] = React.useState<Property | null>(null)
 
@@ -175,13 +178,18 @@ function PropiedadesContent() {
   const tipoInicial = searchParams.get('tipo') === 'rentas' ? 'Renta' : 'Venta'
   const [activeTab, setActiveTab] = React.useState<'Venta' | 'Renta'>(tipoInicial)
   const [selectedCategory, setSelectedCategory] = React.useState<PropertyCategory | null>(null)
-  const [searchQuery, setSearchQuery] = React.useState('')
+  const [searchQuery, setSearchQuery] = React.useState(searchParams.get('q') ?? '')
   const [currentPage, setCurrentPage] = React.useState(1)
   const [showFilters, setShowFilters] = React.useState(false)
 
   React.useEffect(() => {
     setActiveTab(tipoInicial)
   }, [tipoInicial])
+
+  React.useEffect(() => {
+    setSearchQuery(searchParams.get('q') ?? '')
+    setCurrentPage(1)
+  }, [searchParams])
 
   const filteredProperties = React.useMemo(() => {
     let results = REAL_PROPERTIES
@@ -193,12 +201,19 @@ function PropiedadesContent() {
     }
 
     if (searchQuery.trim()) {
-      const query = searchQuery.toLowerCase()
-      results = results.filter(p =>
-        p.title.toLowerCase().includes(query) ||
-        p.zone.toLowerCase().includes(query) ||
-        p.description.toLowerCase().includes(query)
-      )
+      const terms = normalizeText(searchQuery).split(/\s+/).filter(Boolean)
+      results = results.filter(p => {
+        const haystack = normalizeText([
+          p.title,
+          p.zone,
+          p.description,
+          p.price,
+          p.type,
+          PROPERTY_CATEGORIES.find(c => c.value === p.category)?.label ?? '',
+          p.highlights.join(' '),
+        ].join(' '))
+        return terms.every(term => haystack.includes(term))
+      })
     }
 
     return results
@@ -216,6 +231,8 @@ function PropiedadesContent() {
     setCurrentPage(1)
     const params = new URLSearchParams(searchParams.toString())
     params.set('tipo', tab === 'Venta' ? 'ventas' : 'rentas')
+    if (searchQuery.trim()) params.set('q', searchQuery.trim())
+    else params.delete('q')
     router.replace(`/propiedades?${params.toString()}`, { scroll: false })
   }
 
@@ -228,6 +245,10 @@ function PropiedadesContent() {
     setSelectedCategory(null)
     setSearchQuery('')
     setCurrentPage(1)
+    const params = new URLSearchParams(searchParams.toString())
+    params.delete('q')
+    const qs = params.toString()
+    router.replace(qs ? `/propiedades?${qs}` : '/propiedades', { scroll: false })
   }
 
   const activeCategoryLabel = selectedCategory
@@ -280,7 +301,7 @@ function PropiedadesContent() {
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                 <input
                   type="text"
-                  placeholder="Buscar por zona o nombre..."
+                  placeholder="Buscar por palabra: zona, nombre, precio..."
                   value={searchQuery}
                   onChange={(e) => { setSearchQuery(e.target.value); setCurrentPage(1) }}
                   className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
