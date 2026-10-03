@@ -31,7 +31,7 @@ export function Footer() {
 
             <div className="flex flex-col mt-3 space-y-2 text-xs font-medium">
               <Link
-                href="#properties"
+                href="/propiedades"
                 className="no-underline text-slate-400 hover:text-blue-400 transition-colors"
               >
                 Propiedades
