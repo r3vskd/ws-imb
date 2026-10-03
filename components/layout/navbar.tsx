@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { useTheme } from "next-themes"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -13,6 +13,7 @@ export function Navbar() {
   const [isOpen, setIsOpen] = React.useState(false)
   const [isScrolled, setIsScrolled] = React.useState(false)
   const pathname = usePathname()
+  const router = useRouter()
   const isPropiedades = pathname.startsWith('/propiedades')
   const { resolvedTheme } = useTheme()
 
@@ -29,6 +30,8 @@ export function Navbar() {
     const element = document.getElementById(id)
     if (element) {
       element.scrollIntoView({ behavior: "smooth" })
+    } else {
+      router.push(`/#${id}`)
     }
   }
 
@@ -64,15 +67,15 @@ export function Navbar() {
             >
               Categorías
             </button>
-            <button
-              onClick={() => scrollToSection("properties")}
+            <Link
+              href="/propiedades"
               className={cn(
                 "text-sm font-semibold transition-colors duration-200 no-underline focus:outline-none",
                 isScrolled && !isPropiedades ? "text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400" : "text-slate-100 hover:text-white"
               )}
             >
               Propiedades
-            </button>
+            </Link>
             <button
               onClick={() => scrollToSection("expertise")}
               className={cn(
@@ -91,6 +94,15 @@ export function Navbar() {
             >
               Testimonios
             </button>
+            <Link
+              href="/sobre-nosotros"
+              className={cn(
+                "text-sm font-semibold transition-colors duration-200 no-underline focus:outline-none",
+                isScrolled && !isPropiedades ? "text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400" : "text-slate-100 hover:text-white"
+              )}
+            >
+              Sobre nosotros
+            </Link>
 
             <ThemeToggle
               className={cn(
@@ -137,12 +149,12 @@ export function Navbar() {
               >
                 Categorías
               </button>
-              <button
-                onClick={() => scrollToSection("properties")}
+              <Link
+                href="/propiedades"
                 className="text-left text-base font-semibold text-slate-800 dark:text-slate-200 hover:text-blue-600 no-underline"
               >
                 Propiedades
-              </button>
+              </Link>
               <button
                 onClick={() => scrollToSection("expertise")}
                 className="text-left text-base font-semibold text-slate-800 dark:text-slate-200 hover:text-blue-600 no-underline"
@@ -155,6 +167,12 @@ export function Navbar() {
               >
                 Testimonios
               </button>
+              <Link
+                href="/sobre-nosotros"
+                className="text-left text-base font-semibold text-slate-800 dark:text-slate-200 hover:text-blue-600 no-underline"
+              >
+                Sobre nosotros
+              </Link>
               <div className="flex items-center justify-between">
                 <span className="text-base font-semibold text-slate-800 dark:text-slate-200">Apariencia</span>
                 <ThemeToggle className="text-slate-800 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800" />

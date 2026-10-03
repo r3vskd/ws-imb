@@ -40,6 +40,9 @@ const schema = z.object({
 
 type FormValues = z.infer<typeof schema>
 
+const inputGlassClass =
+  'bg-white text-black placeholder:text-slate-500 border-slate-200 dark:bg-black/55 dark:text-white dark:placeholder:text-white/50 dark:border-white/10 backdrop-blur-md ring-offset-card'
+
 export default function ContactPage() {
   const [submitted, setSubmitted] = React.useState(false)
 
@@ -129,7 +132,7 @@ export default function ContactPage() {
           </div>
         ) : (
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 bg-card border border-slate-200 dark:border-slate-800 p-8 rounded-2xl shadow-sm">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="contact-form space-y-6 bg-card border border-slate-200 dark:border-slate-800 p-8 rounded-2xl shadow-sm">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <FormField
                   control={form.control}
@@ -138,7 +141,7 @@ export default function ContactPage() {
                     <FormItem>
                       <FormLabel>Nombre</FormLabel>
                       <FormControl>
-                        <Input placeholder="Tu nombre" {...field} />
+                          <Input placeholder="Tu nombre" className={inputGlassClass} {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -152,7 +155,7 @@ export default function ContactPage() {
                     <FormItem>
                       <FormLabel>Apellido</FormLabel>
                       <FormControl>
-                        <Input placeholder="Tu apellido" {...field} />
+                          <Input placeholder="Tu apellido" className={inputGlassClass} {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -168,7 +171,7 @@ export default function ContactPage() {
                     <FormItem>
                       <FormLabel>Número de teléfono</FormLabel>
                       <FormControl>
-                        <Input placeholder="Ej. +52 999 123 4567" {...field} />
+                          <Input placeholder="Ej. +52 999 123 4567" className={inputGlassClass} {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -182,7 +185,7 @@ export default function ContactPage() {
                     <FormItem>
                       <FormLabel>Correo electrónico</FormLabel>
                       <FormControl>
-                        <Input type="email" placeholder="tu@correo.com" {...field} />
+                          <Input type="email" placeholder="tu@correo.com" className={inputGlassClass} {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -198,7 +201,7 @@ export default function ContactPage() {
                     <FormItem>
                       <FormLabel>Ciudad</FormLabel>
                       <FormControl>
-                        <Input placeholder="Ej. Mérida, CDMX, Monterrey" {...field} />
+                          <Input placeholder="Ej. Mérida, CDMX, Monterrey" className={inputGlassClass} {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -212,7 +215,7 @@ export default function ContactPage() {
                     <FormItem>
                       <FormLabel>País</FormLabel>
                       <FormControl>
-                        <Input placeholder="Ej. México" {...field} />
+                          <Input placeholder="Ej. México" className={inputGlassClass} {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -227,7 +230,7 @@ export default function ContactPage() {
                   <FormItem>
                     <FormLabel>Mensaje (máximo 200 palabras)</FormLabel>
                     <FormControl>
-                      <Textarea rows={5} placeholder="Cuéntanos qué tipo de propiedad buscas o qué propiedad deseas vender/rentar" {...field} />
+                      <Textarea rows={5} placeholder="Cuéntanos qué tipo de propiedad buscas o qué propiedad deseas vender/rentar" className={inputGlassClass} {...field} />
                     </FormControl>
                     <div className="text-xs text-muted-foreground">{wordCount} / 200 palabras</div>
                     <FormMessage />

@@ -14,7 +14,6 @@ import {
   Home,
   Building2,
   Building,
-  Warehouse,
   Search,
   Bath,
   BedDouble,
@@ -694,7 +693,7 @@ export default function HomePage() {
                 credentials: ["Asesora Inmobiliaria Certificada", "Especialista en Renta y VentaResidencial", "Cierre de Operaciones"]
               },
               {
-                name: "Lic. José Luis Peraza Peraza",
+                name: "C.P. José Luis Peraza Peraza",
                 role: "Director De Finanzas Y Operaciones / Asesor Inmobiliario",
                 description: "Contador Público con enfoque en finanzas inmobiliarias. Gestión operativa y administrativa de operaciones de compra, venta y renta.",
                 credentials: ["Contador Público", "Gestión de Operaciones Inmobiliarias y Negociación", "Análisis Financiero"]
@@ -753,49 +752,27 @@ export default function HomePage() {
             Contáctanos hoy y recibe asesoría personalizada para tu operación inmobiliaria.
           </motion.p>
 
-          <motion.div variants={fadeInUp} className="flex flex-wrap justify-center gap-4">
-            <Button 
-              size="lg" 
-              className="bg-white text-primary hover:bg-white/90 font-semibold"
-              onClick={() => window.open('https://wa.me/529992284783?text=Hola%20Wendy%2C%20quiero%20comprar%20una%20propiedad', '_blank')}
-            >
-              <Home className="w-5 h-5 mr-2" />
-              Comprar
-            </Button>
-            <Button 
-              size="lg" 
-              className="bg-white text-primary hover:bg-white/90 font-semibold"
-              onClick={() => window.open('https://wa.me/529992284783?text=Hola%20Wendy%2C%20quiero%20rentar%20una%20propiedad', '_blank')}
-            >
-              <Building2 className="w-5 h-5 mr-2" />
-              Rentar
-            </Button>
-            <Button 
-              size="lg" 
-              className="bg-white text-primary hover:bg-white/90 font-semibold"
-              onClick={() => window.open('https://wa.me/529992284783?text=Hola%20Wendy%2C%20quiero%20vender%20mi%20propiedad', '_blank')}
-            >
-              <Building className="w-5 h-5 mr-2" />
-              Vender
-            </Button>
-            <Button 
-              size="lg" 
-              className="bg-white text-primary hover:bg-white/90 font-semibold"
-              onClick={() => window.open('https://wa.me/529992284783?text=Hola%20Wendy%2C%20quiero%20rentar%20mi%20propiedad', '_blank')}
-            >
-              <Warehouse className="w-5 h-5 mr-2" />
-              Rentar mi propiedad
-            </Button>
-          </motion.div>
-
-          <motion.div variants={fadeInUp} className="mt-10">
-            <Button 
-              size="lg" 
-              className="bg-white text-black hover:bg-white/90 font-semibold"
+          <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Button
+              className="w-64 sm:flex-1 sm:max-w-[260px] h-12 px-6 rounded-2xl text-base font-semibold bg-card text-card-foreground border border-slate-200 dark:border-slate-800 shadow-sm hover:bg-card hover:shadow-lg hover:-translate-y-0.5 dark:hover:bg-black/65 transition-all duration-300"
               onClick={() => window.open('https://wa.me/529992284783', '_blank')}
             >
               <MessageCircle className="w-5 h-5 mr-2" />
-              Contactar a Wendy
+              Contacto
+            </Button>
+            <Button
+              className="w-64 sm:flex-1 sm:max-w-[260px] h-12 px-6 rounded-2xl text-base font-semibold bg-card text-card-foreground border border-slate-200 dark:border-slate-800 shadow-sm hover:bg-card hover:shadow-lg hover:-translate-y-0.5 dark:hover:bg-black/65 transition-all duration-300"
+              onClick={() => window.open('https://wa.me/529992284783?text=Hola%20Wendy%2C%20quiero%20vender%20mi%20propiedad', '_blank')}
+            >
+              <Building className="w-5 h-5 mr-2" />
+              Vender mi propiedad
+            </Button>
+            <Button
+              className="w-64 sm:flex-1 sm:max-w-[260px] h-12 px-6 rounded-2xl text-base font-semibold bg-card text-card-foreground border border-slate-200 dark:border-slate-800 shadow-sm hover:bg-card hover:shadow-lg hover:-translate-y-0.5 dark:hover:bg-black/65 transition-all duration-300"
+              onClick={() => window.open('https://wa.me/529992284783?text=Hola%20Wendy%2C%20quiero%20rentar%20mi%20propiedad', '_blank')}
+            >
+              <Home className="w-5 h-5 mr-2" />
+              Rentar mi propiedad
             </Button>
           </motion.div>
         </div>

@@ -153,3 +153,22 @@ html.dark {
   backdrop-filter: blur(16px);
   border-color: rgba(255, 255, 255, 0.08);
 }
+
+/* ===== Contacto: autofill del navegador forzado al estilo del modo activo ===== */
+.contact-form input:-webkit-autofill,
+.contact-form input:-webkit-autofill:hover,
+.contact-form input:-webkit-autofill:focus,
+.contact-form textarea:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px #ffffff inset;
+  -webkit-text-fill-color: #000000;
+  caret-color: #000000;
+}
+
+.dark .contact-form input:-webkit-autofill,
+.dark .contact-form input:-webkit-autofill:hover,
+.dark .contact-form input:-webkit-autofill:focus,
+.dark .contact-form textarea:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.55) inset;
+  -webkit-text-fill-color: #ffffff;
+  caret-color: #ffffff;
+}

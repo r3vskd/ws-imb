@@ -38,7 +38,7 @@ export function Footer() {
               </Link>
 
               <Link
-                href="#expertise"
+                href="/sobre-nosotros"
                 className="no-underline text-slate-400 hover:text-blue-400 transition-colors"
               >
                 Sobre nosotros
@@ -166,14 +166,14 @@ export function Footer() {
 
           <div className="flex mt-4 space-x-6 sm:mt-0">
             <Link
-              href="/contact"
+              href="/politicas-de-privacidad"
               className="no-underline text-slate-500 hover:text-slate-300 transition-colors"
             >
               Política de Privacidad
             </Link>
 
             <Link
-              href="/contact"
+              href="/terminos-y-condiciones"
               className="no-underline text-slate-500 hover:text-slate-300 transition-colors"
             >
               Términos de Servicio
