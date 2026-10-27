@@ -326,11 +326,11 @@ export default function SobreNosotrosPage() {
                     INAPIM
                   </td>
                   <td className="p-4 align-top">
-                    Socio de INAPIM — Instituto Nacional de Asesores Profesionales Inmobiliarios de
+                    Asesor Inmobiliario Certificado INAPIM — Instituto Nacional de Asesores Profesionales Inmobiliarios de
                     México
                   </td>
                   <td className="p-4 align-top">
-                    Socio de INAPIM — Instituto Nacional de Asesores Profesionales Inmobiliarios de
+                    Asesor Inmobiliario Certificado INAPIM — Instituto Nacional de Asesores Profesionales Inmobiliarios de
                     México
                   </td>
                 </tr>
@@ -339,7 +339,7 @@ export default function SobreNosotrosPage() {
                     Licencia inmobiliaria
                   </td>
                   <td className="p-4 align-top">REAI-INSEJUPY-A-00027</td>
-                  <td className="p-4 align-top">REAI-INSEJUPY-EN PROCESO</td>
+                  <td className="p-4 align-top">EN PROCESO</td>
                 </tr>
                 <tr className="border-b border-slate-100 dark:border-slate-800">
                   <td className="p-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground align-top">
