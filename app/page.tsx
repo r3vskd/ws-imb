@@ -688,13 +688,13 @@ export default function HomePage() {
             {[
               {
                 name: "Lic. Wendy Guadalupe Sánchez Villalobos",
-                role: "Directora General / Asesora Inmobiliaria",
+                role: "Directora General / Asesora Inmobiliaria Certificada",
                 description: "Más de 6 años de experiencia. Especialista en relaciones a largo plazo con propietarios.",
                 credentials: ["Asesora Inmobiliaria Certificada", "Especialista en Renta y Venta Residencial", "Cierre de Operaciones"]
               },
               {
                 name: "C.P. José Luis Peraza Peraza",
-                role: "Director De Finanzas Y Operaciones / Asesor Inmobiliario",
+                role: "Director De Finanzas Y Operaciones / Asesor Inmobiliario Certificado",
                 description: "Contador Público con más de 25 años de experiencia. Gestión operativa de compra, venta y renta.",
                 credentials: ["Asesor Inmobiliario Certificado", "Gestión de Operaciones", "Análisis Financiero"]
               }

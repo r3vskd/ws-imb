@@ -1,5 +1,15 @@
+import type { Metadata } from "next"
 import { Navbar } from "@/components/layout/navbar"
 import { Footer } from "@/components/layout/footer"
+
+export const metadata: Metadata = {
+  title: "Política de Privacidad",
+  description:
+    "Aviso de privacidad integral de Wendy Guadalupe Sánchez Villalobos, responsable del tratamiento y protección de datos personales conforme a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares.",
+  alternates: {
+    canonical: "/politicas-de-privacidad",
+  },
+}
 
 export default function PoliticasDePrivacidadPage() {
   return (
@@ -14,187 +24,134 @@ export default function PoliticasDePrivacidadPage() {
         </div>
 
         <div className="space-y-8 text-sm md:text-base text-slate-700 dark:text-slate-300 leading-relaxed">
+          <h2 className="text-xl font-bold text-foreground text-center">
+            Protección Integral de Datos Personales conforme a la Ley Federal de Protección de Datos
+            Personales en Posesión de los Particulares
+          </h2>
+
           <p>
-            Esta Política de Privacidad describe cómo <strong>WS Asesoría Inmobiliaria</strong>{" "}
-            recaba, utiliza y protege los datos personales que nos proporcionas a través de este
-            sitio web, de conformidad con la Ley Federal de Protección de Datos Personales en
-            Posesión de los Particulares (LFPDPPP).
+            En atención a lo dispuesto por la Ley Federal de Protección de Datos Personales en
+            Posesión de los Particulares y su Reglamento, Wendy Guadalupe Sánchez Villalobos, con
+            domicilio en Calle 37 # 350 x 62 A Col. Reforma, informa a todas las personas usuarias,
+            clientes, prospectos, proveedores y cualquier tercero relacionado con sus servicios
+            inmobiliarios, que es responsable del tratamiento, resguardo y protección de los datos
+            personales que nos sean proporcionados, ya sea de manera directa o indirecta, ya sea en
+            forma física, electrónica, verbal o por cualquier otro medio permitido por la
+            legislación vigente.
           </p>
 
-          <section>
-            <h2 className="text-xl font-bold text-foreground mb-3">1. Responsable del tratamiento</h2>
-            <p>
-              WS Asesoría Inmobiliaria, con domicilio en Mérida, Yucatán, México, representada por
-              la Lic. Wendy Guadalupe Sánchez Villalobos. Para cualquier asunto relacionado con la
-              protección de datos personales puedes escribirnos a{" "}
-              <a href="mailto:contacto@wsinmobiliaria.com" className="text-primary font-semibold underline">
-                contacto@wsinmobiliaria.com
-              </a>
-              .
-            </p>
-          </section>
+          <p>
+            Los datos personales que recabamos pueden incluir, de manera enunciativa más no
+            limitativa: nombre completo, domicilio particular y laboral, copia de identificaciones
+            oficiales, fecha y lugar de nacimiento, nacionalidad, estado civil, firma autógrafa o
+            electrónica, números telefónicos, correo electrónico, ocupación, información patrimonial
+            y financiera, referencias personales y comerciales, así como cualquier otro dato o
+            documento necesario para la debida identificación, verificación y cumplimiento de
+            obligaciones legales y regulatorias relacionadas con la prestación de servicios
+            inmobiliarios.
+          </p>
 
-          <section>
-            <h2 className="text-xl font-bold text-foreground mb-3">2. Datos personales que recabamos</h2>
-            <p className="mb-3">A través de este sitio podemos recabar los siguientes datos:</p>
-            <ul className="list-disc pl-5 space-y-2">
-              <li>
-                <strong>Formulario de contacto:</strong> nombre, apellidos, número de teléfono,
-                correo electrónico, ciudad, país y el mensaje que nos envías.
-              </li>
-              <li>
-                <strong>Datos de navegación:</strong> al visitar el sitio se carga Meta Pixel, que
-                puede registrar tu dirección IP, tipo de navegador, dispositivo y las páginas que
-                visitas, con fines de medición.
-              </li>
-              <li>
-                <strong>Preferencias locales:</strong> guardamos en tu navegador la preferencia de
-                tema (claro/oscuro) mediante almacenamiento local. No es un dato personal identificable.
-              </li>
-            </ul>
-            <p className="mt-3">
-              No recabamos datos personales sensibles de forma intencional ni solicitamos
-              información de menores de edad.
-            </p>
-          </section>
+          <p>La finalidad principal del tratamiento de los datos personales consiste en:</p>
 
-          <section>
-            <h2 className="text-xl font-bold text-foreground mb-3">3. Finalidades del tratamiento</h2>
-            <p className="mb-3">
-              <strong>Finalidades primarias</strong> (necesarias para atender tu solicitud):
-            </p>
-            <ul className="list-disc pl-5 space-y-2 mb-3">
-              <li>Responder a tu mensaje y brindarte asesoría inmobiliaria.</li>
-              <li>Comunicarte por correo electrónico o WhatsApp en relación con tu solicitud.</li>
-              <li>Gestionar citas, visitas y seguimiento de operaciones de compra, venta o renta.</li>
-            </ul>
-            <p className="mb-3">
-              <strong>Finalidades secundarias</strong> (medición y mejora, puedes oponerte):
-            </p>
-            <ul className="list-disc pl-5 space-y-2">
-              <li>
-                Medir el desempeño de nuestras campañas publicitarias y mejorar el contenido del
-                sitio mediante Meta Pixel.
-              </li>
-            </ul>
-            <p className="mt-3">
-              Puedes oponerte a las finalidades secundarias escribiendo a nuestro correo de contacto.
-              <strong> No vendemos ni rentamos tus datos personales a terceros.</strong>
-            </p>
-          </section>
+          <ol className="list-[lower-roman] pl-6 space-y-2">
+            <li>
+              Proporcionar servicios de intermediación, promoción, adquisición, renta, venta,
+              administración y asesoría en operaciones inmobiliarias;
+            </li>
+            <li>
+              Cumplir con obligaciones legales, contractuales y regulatorias, incluyendo las
+              relacionadas con la Prevención de Lavado de Dinero (PLD) y Financiamiento al
+              Terrorismo;
+            </li>
+            <li>
+              Realizar procesos de identificación y validación de identidad, cotejo de información y
+              antecedentes, elaboración de expedientes, informes o dictámenes;
+            </li>
+            <li>
+              Mantener comunicación constante para el seguimiento de solicitudes, consultas,
+              negociaciones, formalización de operaciones y atención a requerimientos de personas
+              usuarias; y
+            </li>
+            <li>
+              Enviar información relevante, actualizaciones, avisos y notificaciones derivadas de la
+              relación comercial o profesional.
+            </li>
+          </ol>
 
-          <section>
-            <h2 className="text-xl font-bold text-foreground mb-3">4. Cookies y tecnologías similares</h2>
-            <p className="mb-3">Este sitio utiliza:</p>
-            <ul className="list-disc pl-5 space-y-2">
-              <li>
-                <strong>Cookie de Meta Pixel (_fbp):</strong> para identificar el navegador y medir
-                eventos del sitio (por ejemplo, envíos del formulario o clics a WhatsApp).
-              </li>
-              <li>
-                <strong>Almacenamiento local:</strong> para recordar tu preferencia de tema
-                (claro/oscuro).
-              </li>
-            </ul>
-            <p className="mt-3">
-              Puedes eliminar o bloquear estas cookies desde la configuración de tu navegador; sin
-              ellas, algunas mediciones podrían no registrarse correctamente.
-            </p>
-          </section>
+          <p>
+            Los datos personales podrán ser transferidos, únicamente en la medida que resulte
+            necesario, a autoridades competentes, dependencias gubernamentales, instituciones
+            bancarias, crediticias o financieras, notarios públicos, corredores, valuadores,
+            proveedores de servicios, empresas del mismo grupo empresarial, o a terceros que
+            participen en los procesos relacionados con la operación inmobiliaria, todo ello bajo
+            estricta confidencialidad y conforme a lo dispuesto en la ley.
+          </p>
 
-          <section>
-            <h2 className="text-xl font-bold text-foreground mb-3">5. Transferencias de datos</h2>
-            <p className="mb-3">Tus datos pueden ser comunicados a los siguientes terceros:</p>
-            <ul className="list-disc pl-5 space-y-2">
-              <li>
-                <strong>Resend</strong> (proveedor de correo transaccional): procesa el envío del
-                formulario hacia nuestros correos, exclusivamente por cuenta de WS.
-              </li>
-              <li>
-                <strong>Meta (Facebook/Instagram) y WhatsApp:</strong> cuando visitas el sitio
-                aplica Meta Pixel; si haces clic en un botón de WhatsApp, el mensaje se gestiona
-                sobre la plataforma de Meta.
-              </li>
-            </ul>
-            <p className="mt-3">
-              Las transferencias se realizan cuando son necesarias para atender tu solicitud, para
-              el cumplimiento de una relación precontractual o cuando la ley lo permite.
-            </p>
-          </section>
+          <p>
+            En casos que se requiera su consentimiento expreso, este será solicitado de manera previa
+            y clara.
+          </p>
 
-          <section>
-            <h2 className="text-xl font-bold text-foreground mb-3">
-              6. Derechos ARCO y revocación del consentimiento
-            </h2>
-            <p className="mb-3">
-              Tienes derecho a <strong>A</strong>cceder, <strong>R</strong>ectificar,{" "}
-              <strong>C</strong>ancelar u <strong>O</strong>ponerte al tratamiento de tus datos
-              personales (derechos ARCO, artículos 22 y 23 de la LFPDPPP), así como a revocar en
-              cualquier momento el consentimiento que nos hayas otorgado (artículo 28 de la
-              LFPDPPP).
-            </p>
-            <p className="mb-3">Para ejercer cualquiera de estos derechos, envíanos un correo a contacto@wsinmobiliaria.com con:</p>
-            <ul className="list-disc pl-5 space-y-2">
-              <li>Tu nombre completo y medio para comunicarte la respuesta.</li>
-              <li>La descripción de los datos personales respecto de los cuales ejerces el derecho.</li>
-              <li>Copia de una identificación oficial o representación legal.</li>
-              <li>El derecho que deseas ejercer y la solicitud concreta (acceso, rectificación, cancelación, oposición o revocación).</li>
-            </ul>
-            <p className="mt-3">
-              Daremos respuesta dentro de los plazos establecidos por la ley (veinte días hábiles
-              para resolver, con los días adicionales que correspondan para hacer efectivo el
-              derecho, artículo 32 de la LFPDPPP). El ejercicio de estos derechos es gratuito.
-            </p>
-          </section>
+          <p>
+            Las personas titulares de los datos personales tienen derecho a acceder, rectificar,
+            cancelar u oponerse (derechos ARCO) al tratamiento de sus datos, así como a revocar en
+            cualquier momento el consentimiento otorgado, bajo los términos establecidos por la
+            normatividad aplicable.
+          </p>
 
-          <section>
-            <h2 className="text-xl font-bold text-foreground mb-3">7. Conservación de los datos</h2>
-            <p>
-              Conservamos tus datos personales durante el tiempo necesario para atender tu
-              solicitud y dar seguimiento a posibles operaciones, y después durante los plazos que
-              exija la legislación aplicable o la defensa de eventualidades legales.
-            </p>
-          </section>
+          <p>
+            Para ejercer estos derechos, deberán presentar una solicitud por escrito al correo
+            electrónico{" "}
+            <a
+              href="mailto:ventas@wsinmobiliaria.com"
+              className="text-primary font-semibold underline"
+            >
+              ventas@wsinmobiliaria.com
+            </a>{" "}
+            en el domicilio señalado, acompañando los documentos que acrediten su identidad y los
+            detalles necesarios para atender su petición.
+          </p>
 
-          <section>
-            <h2 className="text-xl font-bold text-foreground mb-3">8. Medidas de seguridad</h2>
-            <p>
-              Mantenemos medidas de seguridad administrativas, físicas y técnicas razonables para
-              proteger tus datos contra daño, pérdida, alteración, destrucción o uso no autorizado.
-              El sitio opera sobre conexión cifrada (HTTPS) y el acceso a la información interna
-              está restringido.
-            </p>
-          </section>
+          <p>
+            Nuestro equipo dará respuesta en los plazos legales correspondientes y orientará sobre el
+            procedimiento a seguir.
+          </p>
 
-          <section>
-            <h2 className="text-xl font-bold text-foreground mb-3">9. Menores de edad</h2>
-            <p>
-              Este sitio no está dirigido a menores de 18 años y no recabamos conscientemente sus
-              datos personales. Si detectamos que hemos recibido información de un menor, la
-              eliminaremos.
-            </p>
-          </section>
+          <p>
+            Nos comprometemos a resguardar y proteger los datos personales a través de la
+            implementación de medidas de seguridad administrativas, técnicas y físicas adecuadas,
+            orientadas a prevenir el acceso no autorizado, uso indebido, alteración, pérdida,
+            destrucción o divulgación indebida de la información.
+          </p>
 
-          <section>
-            <h2 className="text-xl font-bold text-foreground mb-3">10. Modificaciones</h2>
-            <p>
-              Podemos actualizar esta Política de Privacidad en cualquier momento. La versión
-              vigente será siempre la publicada en esta página con su fecha de última actualización.
-            </p>
-          </section>
+          <p>
+            El tratamiento de datos se realiza en estricto apego a los principios de licitud,
+            consentimiento, información, calidad, finalidad, lealtad, proporcionalidad y
+            responsabilidad.
+          </p>
 
-          <section>
-            <h2 className="text-xl font-bold text-foreground mb-3">11. Consultas y reclamaciones</h2>
-            <p>
-              Para cualquier duda sobre el tratamiento de tus datos escribe a{" "}
-              <a href="mailto:contacto@wsinmobiliaria.com" className="text-primary font-semibold underline">
-                contacto@wsinmobiliaria.com
-              </a>
-              . Si consideras que tu derecho a la protección de datos personales ha sido lesionado,
-              puedes acudir al Instituto Nacional de Transparencia, Acceso a la Información y
-              Protección de Datos Personales (INAI) en www.inai.org.mx.
-            </p>
-          </section>
+          <p>
+            Cualquier cambio o modificación a este aviso de privacidad será informado oportunamente a
+            través de{" "}
+            <a
+              href="https://wsinmobiliaria.com/"
+              className="text-primary font-semibold underline"
+            >
+              https://wsinmobiliaria.com/
+            </a>{" "}
+            por lo que invitamos a consultarlo periódicamente.
+          </p>
+
+          <p>
+            Para dudas, comentarios o solicitudes adicionales relacionadas con la privacidad y
+            protección de datos personales, puede contactarnos mediante el correo{" "}
+            <a
+              href="mailto:ventas@wsinmobiliaria.com"
+              className="text-primary font-semibold underline"
+            >
+              ventas@wsinmobiliaria.com
+            </a>
+          </p>
         </div>
       </div>
 
