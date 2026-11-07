@@ -1,0 +1,8 @@
+# Taste
+- Prefers tools/services to be set up as proper MCP servers registered in Command Code rather than used only through their CLI. Confidence: 0.5
+- When adopting UI/components from a design library or docs site, wants them copied verbatim (research the correct integration, no improvised custom variants) — including exact visual effect parameters such as blur values, radii and opacities, and even the fonts/component composition, not an approximation. Confidence: 0.85
+- When replacing an existing section with a reference component, expects the site's existing content, copy, CTAs/redirects, symbols and data to be preserved and adapted into the new component rather than dropped. Confidence: 0.7
+- When adopting a library component whose default effect uses an accent color (e.g. blue/cyan glow), wants it retinted to the site's own monochrome (white) palette and the effect intensity reduced ("less shiny") rather than shipped with the library's defaults. Confidence: 0.6
+- Wants a newly added section to align with the existing page sections' layout metrics — same container width (`container mx-auto px-4`), same vertical padding/thickness and header margins — instead of the reference component's own arbitrary max-widths and spacing. Confidence: 0.6
+- Wants new interactions to reuse the exact motion/blur/spring values of an existing component ("identical like the navbar button animation") and to preserve the current element's styling (e.g. same rounded borders) rather than inventing new values. Confidence: 0.75
+- Wants section background transitions to dissolve smoothly into each other (faded top/bottom edges, no perceptible abrupt color/tone division) while keeping the granulated/noise texture of each background. Confidence: 0.6

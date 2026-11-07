@@ -13,7 +13,7 @@ export default function TerminosYCondicionesPage() {
           </h1>
         </div>
 
-        <div className="space-y-8 text-sm md:text-base text-slate-700 dark:text-slate-300 leading-relaxed">
+        <div className="space-y-8 text-sm md:text-base text-muted-foreground leading-relaxed">
           <p>
             Estos Términos y Condiciones regulan el uso del sitio web de{" "}
             <strong>WS Asesoría Inmobiliaria</strong> (en adelante, "el sitio"). Al navegar o

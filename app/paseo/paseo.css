@@ -1,0 +1,88 @@
+.paseo-inter,
+.paseo-switzer {
+  font-family: var(--paseo-font);
+}
+
+@keyframes paseo-dot {
+  0% {
+    opacity: 0.25;
+    transform: rotate(0deg);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(360deg);
+  }
+}
+
+.paseo-dot {
+  animation: paseo-dot 1.4s cubic-bezier(0.42, 0, 0.58, 1) infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .paseo-dot {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+.paseo-root {
+  --paseo-paper: #0f1012;
+  --paseo-ink: #f4f1eb;
+  --paseo-line: #2c2d32;
+  --paseo-surface: #141416;
+  --paseo-accent: #ffffff;
+  --paseo-toc-bg: #141416;
+  --paseo-toc-text: rgba(255, 255, 255, 0.5);
+  --paseo-toc-text-hover: #ffffff;
+  --paseo-font: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --ws-lilac: #ffffff;
+  background-color: var(--paseo-paper);
+  color: var(--paseo-ink);
+  font-family: var(--paseo-font);
+  text-rendering: optimizeLegibility;
+}
+
+.paseo-display {
+  font-family: var(--paseo-font);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+}
+
+.paseo-sans {
+  font-family: var(--paseo-font);
+}
+
+.paseo-label {
+  font-family: var(--paseo-font);
+  font-size: 0.75rem;
+  line-height: 1rem;
+  letter-spacing: 0.12em;
+}
+
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .paseo-stage {
+    transition: none !important;
+  }
+}

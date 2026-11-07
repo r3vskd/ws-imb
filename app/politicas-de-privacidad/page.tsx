@@ -23,7 +23,7 @@ export default function PoliticasDePrivacidadPage() {
           </h1>
         </div>
 
-        <div className="space-y-8 text-sm md:text-base text-slate-700 dark:text-slate-300 leading-relaxed">
+        <div className="space-y-8 text-sm md:text-base text-muted-foreground leading-relaxed">
           <h2 className="text-xl font-bold text-foreground text-center">
             Protección Integral de Datos Personales conforme a la Ley Federal de Protección de Datos
             Personales en Posesión de los Particulares

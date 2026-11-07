@@ -1,10 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_WEBSITE_FORMS)
-
 export async function POST(req: NextRequest) {
   try {
+    const key = process.env.RESEND_WEBSITE_FORMS
+    if (!key) {
+      console.error('Falta RESEND_WEBSITE_FORMS en el entorno')
+      return NextResponse.json({ error: 'Configuración de correo incompleta' }, { status: 500 })
+    }
+    const resend = new Resend(key)
+
     const body = await req.json()
     const { nombre, apellido, telefono, correo, mensaje, ciudad, pais } = body
 
@@ -42,7 +47,7 @@ export async function POST(req: NextRequest) {
       to: ['contacto@wsinmobiliaria.com', 'software@wsinmobiliaria.com'],
       subject: `Nuevo lead: ${nombre} ${apellido} - ${ciudad}`,
       html,
-      reply_to: correo,
+      replyTo: correo,
     })
 
     return NextResponse.json({ success: true })

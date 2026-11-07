@@ -43,7 +43,15 @@ const config: Config = {
           DEFAULT: 'hsl(var(--destructive))',
           foreground: 'hsl(var(--destructive-foreground))',
         },
-        cta: '#0369A1',
+        cta: 'hsl(var(--primary))',
+        ws: {
+          ink: '#0F1012',
+          graphite: '#141416',
+          surface: '#1E1F23',
+          line: '#2C2D32',
+          gray: '#8A8C93',
+          lilac: '#C9B6F2',
+        },
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
@@ -66,8 +74,8 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ['var(--font-josefin)', 'sans-serif'],
-        heading: ['var(--font-poppins)', 'sans-serif'],
+        sans: ['var(--font-sans)', 'sans-serif'],
+        heading: ['var(--font-heading)', 'sans-serif'],
       },
       borderRadius: {
         lg: 'var(--radius)',

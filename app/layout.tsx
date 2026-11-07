@@ -1,24 +1,8 @@
 import type { Metadata } from 'next'
-import { Poppins, Josefin_Sans } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { MetaPixel } from '@/components/analytics/meta-pixel'
-import { WhatsAppButton } from '@/components/layout/whatsapp-button'
 import { ThemeProvider } from '@/components/theme-provider'
 import './globals.css'
-
-const poppins = Poppins({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  display: 'swap',
-  variable: '--font-poppins',
-})
-
-const josefinSans = Josefin_Sans({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  display: 'swap',
-  variable: '--font-josefin',
-})
 
 export const metadata: Metadata = {
   title: 'WS Asesoría Inmobiliaria | Mérida, Yucatán',
@@ -36,11 +20,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className="scroll-smooth" suppressHydrationWarning>
-      <body className={`${josefinSans.variable} ${poppins.variable} font-sans antialiased bg-background text-foreground selection:bg-teal-600 selection:text-white`}>
-        <ThemeProvider attribute={['class', 'data-theme']} defaultTheme="system" enableSystem>
+      <body className="font-sans antialiased bg-background text-foreground selection:bg-white selection:text-black">
+        <ThemeProvider attribute={['class', 'data-theme']} defaultTheme="dark" enableSystem>
           <MetaPixel />
           {children}
-          <WhatsAppButton />
           <Analytics />
         </ThemeProvider>
       </body>
