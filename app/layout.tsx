@@ -21,7 +21,12 @@ export default function RootLayout({
   return (
     <html lang="es" className="scroll-smooth" suppressHydrationWarning>
       <body className="font-sans antialiased bg-background text-foreground selection:bg-white selection:text-black">
-        <ThemeProvider attribute={['class', 'data-theme']} defaultTheme="dark" enableSystem>
+        <ThemeProvider
+          attribute={['class', 'data-theme']}
+          defaultTheme="light"
+          enableSystem={false}
+          storageKey="ws-theme"
+        >
           <MetaPixel />
           {children}
           <Analytics />

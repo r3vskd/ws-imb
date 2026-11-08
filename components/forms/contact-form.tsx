@@ -120,16 +120,13 @@ export function ContactForm({
     }
   }
 
-  const handleOpenWhatsApp = () => {
-    if (!sent) return
+  if (sent) {
     const phone = "529992284783"
-    const msg = encodeURIComponent(
+    const whatsappMessage = encodeURIComponent(
       `Hola Wendy, mi nombre es ${sent.nombre} ${sent.apellido} (${sent.telefono}). Les escribo desde ${sent.ciudad}, ${sent.pais}. Mensaje: ${sent.mensaje}`,
     )
-    window.open(`https://wa.me/${phone}?text=${msg}`, "_blank")
-  }
+    const whatsappUrl = `https://wa.me/${phone}?text=${whatsappMessage}`
 
-  if (sent) {
     return (
       <Card className={className}>
         <CardContent className="flex flex-col items-center gap-4 py-10 text-center">
@@ -142,13 +139,19 @@ export function ContactForm({
             WhatsApp, presiona el botón a continuación.
           </p>
           <Button
-            type="button"
-            onClick={handleOpenWhatsApp}
-            className="mt-2 h-9 rounded-md border border-foreground/30 bg-foreground/10 px-4 text-xs font-semibold text-foreground backdrop-blur-sm hover:bg-foreground/20 dark:border-white/30 dark:bg-white/10 dark:text-white dark:hover:bg-white/20"
+            asChild
+            className="group mt-2 h-9 rounded-md border border-foreground/30 bg-foreground/10 px-4 text-xs font-semibold text-foreground backdrop-blur-sm hover:bg-foreground/20 dark:border-white/30 dark:bg-white/10 dark:text-white dark:hover:bg-white/20"
           >
-            <MessageCircle className="mr-2 size-4" aria-hidden />
-            Continuar por WhatsApp
-            <ArrowRight className="ml-2 size-4" aria-hidden />
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="no-underline"
+            >
+              <MessageCircle className="mr-2 size-4" aria-hidden />
+              Continuar por WhatsApp
+              <ArrowRight className="ml-2 size-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden />
+            </a>
           </Button>
         </CardContent>
       </Card>
@@ -337,11 +340,11 @@ export function ContactForm({
         </Form>
       </CardContent>
       <CardFooter>
-        <Field orientation="horizontal">
+        <div className="flex w-full flex-col gap-2 sm:flex-row">
           <Button
             type="button"
             onClick={() => reset(form)}
-            className="h-9 rounded-md border border-foreground/30 bg-foreground/10 px-4 text-xs font-semibold text-foreground backdrop-blur-sm hover:bg-foreground/20 dark:border-white/30 dark:bg-white/10 dark:text-white dark:hover:bg-white/20"
+            className="h-9 w-full rounded-md border border-foreground/30 bg-foreground/10 px-4 text-xs font-semibold text-foreground backdrop-blur-sm hover:bg-foreground/20 dark:border-white/30 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 sm:w-auto"
           >
             Restablecer
           </Button>
@@ -349,13 +352,13 @@ export function ContactForm({
             type="submit"
             form="contact-form"
             disabled={sending}
-            className="h-9 rounded-md border border-foreground/30 bg-foreground/10 px-4 text-xs font-semibold text-foreground backdrop-blur-sm hover:bg-foreground/20 dark:border-white/30 dark:bg-white/10 dark:text-white dark:hover:bg-white/20"
+            className="group h-9 w-full rounded-md border border-foreground/30 bg-foreground/10 px-4 text-xs font-semibold text-foreground backdrop-blur-sm hover:bg-foreground/20 dark:border-white/30 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 sm:w-auto"
           >
             <Send className="mr-2 size-4" aria-hidden />
             {sending ? "Enviando..." : "Enviar Formulario"}
-            <ArrowRight className="ml-2 size-4" aria-hidden />
+            <ArrowRight className="ml-2 size-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden />
           </Button>
-        </Field>
+        </div>
       </CardFooter>
       {error && (
         <p className="px-6 pb-6 text-center text-sm text-destructive" role="alert">

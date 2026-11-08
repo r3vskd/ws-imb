@@ -8,9 +8,7 @@ import {
   DialogTitle,
   DialogDescription,
 } from '@/components/ui/dialog'
-import { Button } from '@/components/ui/button'
 import { trackMetaEvent } from '@/components/analytics/meta-pixel'
-import { MessageCircle, User, Sparkles } from 'lucide-react'
 
 interface AdvisorSelectorModalProps {
   isOpen: boolean
@@ -25,28 +23,31 @@ export function AdvisorSelectorModal({
   propertyTitle,
   propertyPrice,
 }: AdvisorSelectorModalProps) {
-  const wendyUrl = 'https://wa.me/message/5OLQ37AI3J2FO1'
-  const joseLuisUrl = 'https://wa.me/message/IUSRNTQEZ4HCN1'
+  const buildWhatsAppUrl = (phone: string, advisor: string) => {
+    const context = propertyTitle
+      ? ` sobre "${propertyTitle}"${propertyPrice ? ` (${propertyPrice})` : ''}`
+      : ''
+    const message = `Hola ${advisor}, quiero recibir asesoría inmobiliaria${context}.`
+    return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`
+  }
 
-  const handleSelectAdvisor = (advisorName: string, targetUrl: string) => {
+  const wendyUrl = buildWhatsAppUrl('529992284783', 'Wendy')
+  const joseLuisUrl = buildWhatsAppUrl('529992583858', 'José Luis')
+
+  const handleSelectAdvisor = (advisorName: string) => {
     trackMetaEvent('Contact', {
       advisor: advisorName,
       property: propertyTitle || 'Consulta general',
       price: propertyPrice || 'N/A',
     })
-    window.open(targetUrl, '_blank')
-    onClose()
   }
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent className="sm:max-w-md rounded-2xl border border-border p-6 shadow-2xl bg-background">
         <DialogHeader className="text-center sm:text-center space-y-2">
-          <div className="w-12 h-12 rounded-full ws-black-surface text-white flex items-center justify-center mx-auto mb-1">
-            <MessageCircle className="w-6 h-6" />
-          </div>
           <DialogTitle className="text-2xl font-bold tracking-tight">
-            Elige a tu Asesor Inmobiliario
+            Equipo
           </DialogTitle>
           <DialogDescription className="text-xs text-muted-foreground">
             {propertyTitle
@@ -56,51 +57,37 @@ export function AdvisorSelectorModal({
         </DialogHeader>
 
         <div className="grid grid-cols-1 gap-4 pt-4">
-          {/* Wendy Sanchez Card */}
-          <button
-            onClick={() => handleSelectAdvisor('Wendy Sánchez', wendyUrl)}
-            className="group flex items-center justify-between p-4 rounded-xl border border-border hover:border-white/30 bg-secondary/40 hover:bg-white/5 transition-all text-left"
+          <a
+            href={wendyUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => handleSelectAdvisor('Wendy Sánchez')}
+            className="block rounded-xl border border-border bg-secondary/40 p-4 text-left no-underline transition-colors hover:bg-foreground/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           >
-            <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 rounded-full ws-black-surface text-white flex items-center justify-center font-bold text-lg shadow">
-                W
-              </div>
-              <div>
-                <div className="font-bold text-base text-foreground group-hover:text-foreground transition-colors flex items-center gap-1.5">
-                  Wendy Sánchez 
-                </div>
-                <div className="text-xs text-muted-foreground">
-                  Asesora Inmobiliaria | Licenciada INAPIM y especialista en Certeza Jurídica
-                </div>
-              </div>
+            <div className="font-bold text-base text-foreground">Wendy Sánchez</div>
+            <div className="mt-1 text-xs text-muted-foreground">
+              Asesora Inmobiliaria | Licenciada INAPIM y especialista en Certeza Jurídica
             </div>
-            <div className="w-9 h-9 rounded-full ws-black-surface text-white group-hover:bg-[#1b1b1d] flex items-center justify-center shadow transition-colors">
-              <MessageCircle className="w-5 h-5" />
+            <div className="mt-2 text-xs font-semibold text-foreground">
+              Consultar por WhatsApp
             </div>
-          </button>
+          </a>
 
-          {/* Jose Luis Card */}
-          <button
-            onClick={() => handleSelectAdvisor('José Luis', joseLuisUrl)}
-            className="group flex items-center justify-between p-4 rounded-xl border border-border hover:border-white/30 bg-secondary/40 hover:bg-white/5 transition-all text-left"
+          <a
+            href={joseLuisUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => handleSelectAdvisor('José Luis')}
+            className="block rounded-xl border border-border bg-secondary/40 p-4 text-left no-underline transition-colors hover:bg-foreground/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           >
-            <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 rounded-full bg-secondary text-foreground flex items-center justify-center font-bold text-lg shadow">
-                JL
-              </div>
-              <div>
-                <div className="font-bold text-base text-foreground group-hover:text-foreground transition-colors">
-                  José Luis
-                </div>
-                <div className="text-xs text-muted-foreground">
-                  Asesor Inmobiliario | Estrategias Patrimoniales y Administrativas
-                </div>
-              </div>
+            <div className="font-bold text-base text-foreground">José Luis</div>
+            <div className="mt-1 text-xs text-muted-foreground">
+              Asesor Inmobiliario | Estrategias Patrimoniales y Administrativas
             </div>
-            <div className="w-9 h-9 rounded-full ws-black-surface text-white group-hover:bg-[#1b1b1d] flex items-center justify-center shadow transition-colors">
-              <MessageCircle className="w-5 h-5" />
+            <div className="mt-2 text-xs font-semibold text-foreground">
+              Consultar por WhatsApp
             </div>
-          </button>
+          </a>
         </div>
       </DialogContent>
     </Dialog>

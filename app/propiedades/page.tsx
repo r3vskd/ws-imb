@@ -79,7 +79,7 @@ function PropertyCard({ property }: { property: Property }) {
     <>
       <motion.article
         variants={fadeInUp}
-        className="group relative aspect-[4/3] min-h-[17rem] overflow-hidden rounded-xl"
+        className="group relative aspect-[4/3] min-h-[19rem] overflow-hidden rounded-xl"
       >
         <img
           src={
@@ -143,11 +143,11 @@ function PropertyCard({ property }: { property: Property }) {
 
             <Button
               onClick={() => handleWhatsApp(property)}
-              className="mt-3 h-9 w-fit rounded-md border border-white/30 bg-white/10 px-4 text-xs font-semibold text-white backdrop-blur-sm hover:bg-white/20"
+              className="group mt-3 h-9 w-fit rounded-md border border-white/30 bg-white/10 px-4 text-xs font-semibold text-white backdrop-blur-sm hover:bg-white/20"
             >
               <MessageCircle className="mr-2 size-4" />
               Consultar por WhatsApp
-              <ArrowRight className="ml-2 size-4" />
+              <ArrowRight className="ml-2 size-4 transition-transform duration-300 group-hover:translate-x-1" />
             </Button>
           </div>
         </div>
@@ -377,7 +377,7 @@ function PropiedadesContent() {
 
       <section className="py-14">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex flex-wrap items-center justify-between gap-2 mb-6">
             <div className="flex items-center gap-3">
               <p className="text-sm text-muted-foreground">
                 <span className="font-semibold text-foreground">{filteredProperties.length}</span> propiedades encontradas
@@ -438,7 +438,7 @@ function PropiedadesContent() {
           )}
 
           {totalPages > 1 && (
-            <div className="flex items-center justify-center gap-2 mt-12">
+            <div className="flex flex-wrap items-center justify-center gap-2 mt-12">
               <button
                 onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
                 disabled={currentPage === 1}
@@ -488,12 +488,12 @@ function PropiedadesContent() {
             </p>
             <Button
               asChild
-              className="h-9 rounded-md border border-white/30 bg-white/10 px-4 text-xs font-semibold text-white backdrop-blur-sm hover:bg-white/20"
+              className="group h-9 rounded-md border border-white/30 bg-white/10 px-4 text-xs font-semibold text-white backdrop-blur-sm hover:bg-white/20"
             >
               <Link href="/contact" className="no-underline">
                 <MessageCircle className="mr-2 size-4" />
                 Contactar a Wendy
-                <ArrowRight className="ml-2 size-4" />
+                <ArrowRight className="ml-2 size-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
             </Button>
           </motion.div>

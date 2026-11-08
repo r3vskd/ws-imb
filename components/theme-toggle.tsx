@@ -22,7 +22,10 @@ export function ThemeToggle({ className }: { className?: string }) {
       aria-label={isDark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
       title={isDark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
       onClick={() => setTheme(isDark ? 'light' : 'dark')}
-      className={cn('h-9 w-9 rounded-xl shrink-0', className)}
+      className={cn(
+        'h-9 w-9 rounded-xl shrink-0 hover:!bg-white/10 hover:!text-current focus-visible:!ring-foreground/30',
+        className,
+      )}
     >
       {mounted ? (
         isDark ? (

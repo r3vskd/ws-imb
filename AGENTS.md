@@ -375,3 +375,35 @@ When blocked, explain the exact blocker and the minimum action needed to proceed
 The objective is to transform the WS Inmobiliaria website into a cohesive, premium, modern real-estate digital experience while retaining its existing information, subpages, routes, business identity, and operational capabilities.
 
 The redesign must be comprehensive, but the execution must remain controlled, secure, reversible, and respectful of the existing project.
+
+---
+## RESOURCES/Components ideas:
+``` markdown
+
+https://motion.dev/docs/react-animate-number
+
+https://ui.aceternity.com/blocks/cta-sections/cta-with-background-noise
+
+https://coss.com/ui/docs/components/segmented-control
+
+https://www.navbar.gallery/type/mega-menu
+
+https://www.frontify.com/en
+
+https://www.framer.com/marketplace/components/linescroller/
+
+https://vaadin.com/docs/latest/components/context-menu
+
+https://cuicui.day/common-ui
+
+https://animata.design/docs/background/blurry-blob
+
+https://www.eldoraui.site/docs/components/photon-beam
+
+https://www.shadcnblocks.com/block/case-studies3
+
+https://ui.shadcn.com/docs/components/base/chart
+
+https://play.prebuiltui.com/components/blog-sections/modern-dark-blog-post-grid-section-f2ed
+
+```

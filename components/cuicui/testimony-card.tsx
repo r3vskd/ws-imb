@@ -23,7 +23,7 @@ const UserInfo = ({ avatar, name, position }: UserInfoProps) => {
         <h6 className="text-sm font-semibold text-neutral-900 dark:text-neutral-200">
           {name}
         </h6>
-        <p className="text-xs text-neutral-500 dark:text-neutral-400">
+        <p className="text-xs text-neutral-600 dark:text-neutral-400">
           {position}
         </p>
       </div>

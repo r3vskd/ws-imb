@@ -4,7 +4,6 @@ import * as React from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { useInView } from "react-intersection-observer"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { Navbar } from "@/components/layout/navbar"
 import { Footer } from "@/components/layout/footer"
 import { REAL_PROPERTIES, Property } from "@/lib/properties"
@@ -13,7 +12,7 @@ import { Testimonials } from "@/components/cuicui/testimonials"
 import { TestimonialCard } from "@/components/cuicui/testimony-card"
 import BlurryBlob from "@/components/animata/background/blurry-blob"
 import { LazyGlobe } from "@/components/eldoraui/lazy-globe"
-import { BlurInText } from "@/components/eldoraui/blur-in-text"
+import { BlurIn, BlurInText } from "@/components/eldoraui/blur-in-text"
 import { ContactForm } from "@/components/forms/contact-form"
 import {
   Home,
@@ -50,7 +49,6 @@ const staggerContainer = {
 }
 
 import Link from "next/link"
-import { useRouter } from "next/navigation"
 import { AdvisorSelectorModal } from "@/components/layout/advisor-selector-modal"
 
 const rentSteps = [
@@ -151,12 +149,10 @@ const testimonials = [
 ]
 
 export default function HomePage() {
-  const router = useRouter()
   const { scrollYProgress } = useScroll()
   const heroScale = useTransform(scrollYProgress, [0, 0.5], [1, 1.05])
 
   const [filterType, setFilterType] = React.useState<string>('Todos')
-  const [searchQuery, setSearchQuery] = React.useState<string>('')
   const [selectedProperty, setSelectedProperty] = React.useState<Property | null>(null)
   const [advisorOpen, setAdvisorOpen] = React.useState(false)
 
@@ -180,25 +176,14 @@ export default function HomePage() {
     setSelectedProperty(property)
   }
 
-  const handleHeroSearch = () => {
-    const q = searchQuery.trim()
-    if (q) {
-      trackMetaEvent('Search', { search_string: q })
-    }
-    const params = new URLSearchParams()
-    params.set('tipo', 'ventas')
-    if (q) params.set('q', q)
-    router.push(`/propiedades?${params.toString()}`)
-  }
-
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+    <div className="landing-page min-h-screen text-foreground overflow-x-hidden">
       <Navbar />
 
       {/* Hero Section */}
       <motion.section
         style={{ scale: heroScale }}
-        className="relative min-h-[90vh] flex items-center justify-center pt-16"
+        className="relative min-h-[100svh] flex items-center justify-center pt-16"
       >
         <div
           className="absolute inset-0 bg-cover bg-center"
@@ -208,12 +193,7 @@ export default function HomePage() {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0F1012] via-[#0F1012]/75 to-[#0F1012]/45 backdrop-blur-[2px]" />
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="relative container mx-auto px-4 text-center text-white py-20"
-        >
+        <BlurIn className="relative container mx-auto px-4 text-center text-white py-20">
 
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-6 tracking-tight leading-tight max-w-5xl mx-auto drop-shadow-md">
             Encuentra tu propiedad con el mejor equipo de agentes inmobiliarios.
@@ -224,26 +204,31 @@ export default function HomePage() {
             Mérida Yucatán es una de las ciudades más seguras del mundo, según la reconocida CEOWORLD Magazine y la más segura de México.
           </p>
 
-          <form
-            onSubmit={(e) => { e.preventDefault(); handleHeroSearch() }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-xl mx-auto bg-white/10 p-2 rounded-2xl backdrop-blur-md border border-white/20"
-          >
-            <Input
-              type="text"
-              placeholder="Buscar por zona (ej. Dzityá, Tixcacal, Temozón)..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="bg-card/90 text-foreground border-none h-12 text-base rounded-xl focus-visible:ring-2 focus-visible:ring-white/40"
-            />
-            <Button type="submit" size="lg" className="w-full sm:w-auto h-12 ws-black-surface text-white hover:bg-[#1b1b1d] font-semibold rounded-xl px-8 shadow-lg">
-              <Search className="mr-2 h-5 w-5" /> Buscar
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-xl mx-auto">
+            <Button
+              asChild
+              className="group h-11 rounded-md border border-white/30 bg-white/10 px-5 text-sm font-semibold text-white backdrop-blur-sm hover:bg-white/20"
+            >
+              <Link href="/propiedades" className="no-underline">
+                Ver catálogo de propiedades
+                <ArrowRight className="ml-2 size-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
             </Button>
-          </form>
-        </motion.div>
+            <Button
+              asChild
+              className="group h-11 rounded-md border border-white/30 bg-white/10 px-5 text-sm font-semibold text-white backdrop-blur-sm hover:bg-white/20"
+            >
+              <Link href="/contact" className="no-underline">
+                Enviar mensaje
+                <ArrowRight className="ml-2 size-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
+            </Button>
+          </div>
+        </BlurIn>
       </motion.section>
 
       {/* Servicios Section — vertical card marquee */}
-      <section id="servicios" className="py-20 bg-background">
+      <section id="servicios" className="scroll-mt-24 py-20">
         <div className="container mx-auto px-4">
           <BlurInText text="Nuestros Servicios" />
           <p className="text-muted-foreground max-w-2xl mx-auto mt-4 text-center">
@@ -263,19 +248,19 @@ export default function HomePage() {
                   {services.map((service) => (
                     <article
                       key={service.title}
-                      className="mb-4 flex items-start gap-4 rounded-2xl border border-white/10 bg-[#141416] p-5"
+                      className="mb-4 flex items-start gap-4 rounded-2xl border border-border bg-card p-5 dark:border-white/10 dark:bg-[#141416]"
                     >
-                      <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-white/5 text-white">
+                      <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-foreground/5 text-foreground dark:bg-white/5 dark:text-white">
                         <service.icon className="size-5" />
                       </div>
                       <div className="min-w-0">
-                        <h3 className="text-base font-semibold tracking-tight text-white">
+                        <h3 className="text-base font-semibold tracking-tight text-foreground dark:text-white">
                           {service.title}
                         </h3>
-                        <p className="mt-1 text-sm leading-relaxed text-white/60">
+                        <p className="mt-1 text-sm leading-relaxed text-muted-foreground dark:text-white/60">
                           {service.description}
                         </p>
-                        <p className="mt-3 text-[11px] font-medium uppercase tracking-[0.12em] text-white/35">
+                        <p className="mt-3 text-[11px] font-medium uppercase tracking-[0.12em] text-muted-foreground dark:text-white/35">
                           {service.features.join(" · ")}
                         </p>
                       </div>
@@ -291,15 +276,15 @@ export default function HomePage() {
       {/* Fused services & categories — PrebuiltUI blog grid */}
       <section
         id="featured"
-        className="relative overflow-hidden font-geist text-white"
+        className="scroll-mt-24 relative overflow-hidden font-geist text-foreground"
       >
         <div
           aria-hidden
-          className="absolute inset-0 ws-black-surface"
+          className="absolute inset-0 hidden dark:block ws-black-surface"
         ></div>
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden"
+          className="pointer-events-none absolute inset-0 hidden dark:flex items-center justify-center overflow-hidden"
         >
           <BlurryBlob
             firstBlobColor="bg-white/20"
@@ -310,19 +295,21 @@ export default function HomePage() {
 
         <div className="container relative z-10 mx-auto flex flex-col items-center px-4 py-14">
           <div className="flex flex-col items-center mb-10 text-center">
-            <span className="bg-zinc-800 text-sm px-6 py-1.5 rounded-full mb-5">
+            <span className="border border-border bg-foreground/5 text-sm px-6 py-1.5 rounded-full mb-5 dark:border-transparent dark:bg-zinc-800">
               Servicios
             </span>
-            <h2 className="text-[40px] font-medium max-w-[530px] leading-tight">
-              Renta, venta y zonas destacadas
-            </h2>
+            <BlurIn>
+              <h2 className="text-3xl sm:text-4xl md:text-[40px] font-medium max-w-[530px] leading-tight">
+                Renta, venta y zonas destacadas
+              </h2>
+            </BlurIn>
           </div>
 
-          <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Rentar */}
             <article
               id="rentar"
-              className="border border-zinc-800 rounded-[18px] flex flex-col group hover:border-zinc-700 transition duration-300 row-span-1 md:row-span-2 h-full overflow-hidden hover:-translate-y-1"
+              className="border border-border rounded-[18px] flex flex-col group hover:border-foreground/30 transition duration-300 row-span-1 lg:row-span-2 h-full overflow-hidden hover:-translate-y-1 dark:border-zinc-800 dark:hover:border-zinc-700"
             >
               <div className="relative w-full flex-1 min-h-52 overflow-hidden rounded-2xl">
                 <img
@@ -331,10 +318,10 @@ export default function HomePage() {
                   className="absolute inset-0 h-full w-full scale-[1.05] object-cover"
                 />
               </div>
-              <div className="p-6 flex flex-col">
+              <div className="p-4 sm:p-6 flex flex-col">
                 <div className="flex items-center gap-3 mb-4">
                   <span className="text-sm">Renta</span>
-                  <div className="w-px h-3 bg-white"></div>
+                  <div className="w-px h-3 bg-foreground/20 dark:bg-white"></div>
                   <div className="flex items-center gap-1.5">
                     <svg
                       width="18"
@@ -345,7 +332,7 @@ export default function HomePage() {
                     >
                       <path
                         d="M7.5 1.5h3m-1.5 9 2.25-2.25M9 16.5a6 6 0 1 0 0-12 6 6 0 0 0 0 12"
-                        stroke="#fff"
+                        stroke="currentColor"
                         strokeLinecap="round"
                         strokeLinejoin="round"
                       />
@@ -356,7 +343,7 @@ export default function HomePage() {
                 <h3 className="text-lg/6.5 font-medium max-w-[360px] mb-3">
                   ¿Quieres rentar tu propiedad?
                 </h3>
-                <p className="text-sm/5 text-white/80 font-light mb-5 max-w-[370px]">
+                <p className="text-sm/5 text-muted-foreground dark:text-white/80 font-light mb-5 max-w-[370px]">
                   En WS no solo publicamos tu propiedad. Nos encargamos de todo el
                   proceso para que tú solo disfrutes de los beneficios.
                 </p>
@@ -364,10 +351,10 @@ export default function HomePage() {
                   {rentSteps.map((step) => (
                     <div key={step} className="flex items-start gap-2">
                       <CheckCircle2
-                        className="mt-0.5 size-4 shrink-0 text-white/60"
+                        className="mt-0.5 size-4 shrink-0 text-muted-foreground dark:text-white/60"
                         aria-hidden
                       />
-                      <span className="text-xs leading-relaxed text-white/70">
+                      <span className="text-xs leading-relaxed text-muted-foreground dark:text-white/70">
                         {step}
                       </span>
                     </div>
@@ -376,11 +363,11 @@ export default function HomePage() {
                 <Button
                   type="button"
                   onClick={() => setAdvisorOpen(true)}
-                  className="h-9 w-fit rounded-md border border-white/30 bg-white/10 px-4 text-xs font-semibold text-white backdrop-blur-sm hover:bg-white/20"
+                  className="group h-9 w-fit rounded-md border border-foreground/30 bg-foreground/10 px-4 text-xs font-semibold text-foreground backdrop-blur-sm hover:bg-foreground/20"
                 >
                   <MessageCircle className="mr-2 size-4" />
                   Rentar mi propiedad
-                  <ArrowRight className="ml-2 size-4" />
+                  <ArrowRight className="ml-2 size-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </Button>
               </div>
             </article>
@@ -388,7 +375,7 @@ export default function HomePage() {
             {/* Vender */}
             <article
               id="vender"
-              className="border border-zinc-800 rounded-[18px] flex flex-col sm:flex-row gap-5 group hover:border-zinc-700 transition duration-300 overflow-hidden hover:-translate-y-1"
+              className="border border-border rounded-[18px] flex flex-col sm:flex-row gap-5 group hover:border-foreground/30 transition duration-300 overflow-hidden hover:-translate-y-1 dark:border-zinc-800 dark:hover:border-zinc-700"
             >
               <img
                 src="/ventas-placeholder.jpg"
@@ -398,7 +385,7 @@ export default function HomePage() {
               <div className="flex flex-col py-3 md:py-5 pr-2 max-md:pl-4">
                 <div className="flex items-center gap-3 mb-4">
                   <span className="text-sm">Venta</span>
-                  <div className="w-px h-3 bg-white"></div>
+                  <div className="w-px h-3 bg-foreground/20 dark:bg-white"></div>
                   <div className="flex items-center gap-1.5">
                     <svg
                       width="18"
@@ -409,7 +396,7 @@ export default function HomePage() {
                     >
                       <path
                         d="M7.5 1.5h3m-1.5 9 2.25-2.25M9 16.5a6 6 0 1 0 0-12 6 6 0 0 0 0 12"
-                        stroke="#fff"
+                        stroke="currentColor"
                         strokeLinecap="round"
                         strokeLinejoin="round"
                       />
@@ -420,7 +407,7 @@ export default function HomePage() {
                 <h3 className="text-lg font-medium mb-3">
                   ¿Quieres vender tu propiedad?
                 </h3>
-                <p className="text-sm/5 text-white/80 font-light mb-4">
+                <p className="text-sm/5 text-muted-foreground dark:text-white/80 font-light mb-4">
                   Desarrollamos una estrategia de comercialización personalizada para
                   obtener el mejor valor por tu propiedad.
                 </p>
@@ -428,10 +415,10 @@ export default function HomePage() {
                   {sellSteps.map((step) => (
                     <div key={step} className="flex items-start gap-2">
                       <CheckCircle2
-                        className="mt-0.5 size-4 shrink-0 text-white/60"
+                        className="mt-0.5 size-4 shrink-0 text-muted-foreground dark:text-white/60"
                         aria-hidden
                       />
-                      <span className="text-xs leading-relaxed text-white/70">
+                      <span className="text-xs leading-relaxed text-muted-foreground dark:text-white/70">
                         {step}
                       </span>
                     </div>
@@ -440,17 +427,17 @@ export default function HomePage() {
                 <Button
                   type="button"
                   onClick={() => setAdvisorOpen(true)}
-                  className="mt-auto h-9 w-fit rounded-md border border-white/30 bg-white/10 px-4 text-xs font-semibold text-white backdrop-blur-sm hover:bg-white/20"
+                  className="group mt-auto h-9 w-fit rounded-md border border-foreground/30 bg-foreground/10 px-4 text-xs font-semibold text-foreground backdrop-blur-sm hover:bg-foreground/20"
                 >
                   <MessageCircle className="mr-2 size-4" />
                   Vender mi propiedad
-                  <ArrowRight className="ml-2 size-4" />
+                  <ArrowRight className="ml-2 size-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </Button>
               </div>
             </article>
 
             {/* Categorías */}
-            <article className="border border-zinc-800 rounded-[18px] flex flex-col sm:flex-row gap-5 group hover:border-zinc-700 transition duration-300 overflow-hidden hover:-translate-y-1">
+            <article className="border border-border rounded-[18px] flex flex-col sm:flex-row gap-5 group hover:border-foreground/30 transition duration-300 overflow-hidden hover:-translate-y-1 dark:border-zinc-800 dark:hover:border-zinc-700">
               <img
                 src="/ajVnNQ.jpg"
                 alt="Propiedades en Mérida"
@@ -459,7 +446,7 @@ export default function HomePage() {
               <div className="flex flex-col py-3 md:py-5 pr-2 max-md:pl-4">
                 <div className="flex items-center gap-3 mb-4">
                   <span className="text-sm">Zonas</span>
-                  <div className="w-px h-3 bg-white"></div>
+                  <div className="w-px h-3 bg-foreground/20 dark:bg-white"></div>
                   <div className="flex items-center gap-1.5">
                     <MapPin className="size-[18px]" aria-hidden />
                     <span className="text-sm">2 categorías</span>
@@ -468,25 +455,25 @@ export default function HomePage() {
                 <h3 className="text-lg font-medium mb-3">
                   Categorías y Zonas Destacadas
                 </h3>
-                <p className="text-sm/5 text-white/80 font-light mb-4">
+                <p className="text-sm/5 text-muted-foreground dark:text-white/80 font-light mb-4">
                   Explora las mejores opciones de inversión patrimonial en el norte y
                   poniente estratégico de Mérida.
                 </p>
 
                 <div className="mb-5 space-y-3">
-                  <div className="rounded-xl border border-zinc-800 p-3">
+                  <div className="rounded-xl border border-border p-3 dark:border-zinc-800">
                     <div className="flex items-center gap-2">
                       <Home className="size-4" aria-hidden />
                       <span className="text-sm font-medium">Ventas</span>
                     </div>
-                    <p className="mt-1 text-xs text-white/60">
+                    <p className="mt-1 text-xs text-muted-foreground dark:text-white/60">
                       Casas, departamentos, townhouses y más
                     </p>
-                    <div className="mt-2 flex items-center justify-between gap-2">
+                    <div className="mt-2 flex flex-wrap items-center justify-between gap-2">
                       <span className="text-xs font-semibold">Desde $2M MXN</span>
                       <Button
                         asChild
-                        className="h-9 rounded-md border border-white/30 bg-white/10 px-4 text-xs font-semibold text-white backdrop-blur-sm hover:bg-white/20"
+                        className="group h-9 w-full rounded-md border border-foreground/30 bg-foreground/10 px-4 text-xs font-semibold text-foreground backdrop-blur-sm hover:bg-foreground/20 sm:w-auto"
                       >
                         <Link
                           href="/propiedades?tipo=ventas"
@@ -494,27 +481,27 @@ export default function HomePage() {
                         >
                           <Search className="mr-2 size-4" />
                           Buscar catálogo
-                          <ArrowRight className="ml-2 size-4" />
+                          <ArrowRight className="ml-2 size-4 transition-transform duration-300 group-hover:translate-x-1" />
                         </Link>
                       </Button>
                     </div>
                   </div>
 
-                  <div className="rounded-xl border border-zinc-800 p-3">
+                  <div className="rounded-xl border border-border p-3 dark:border-zinc-800">
                     <div className="flex items-center gap-2">
                       <Building2 className="size-4" aria-hidden />
                       <span className="text-sm font-medium">Rentas</span>
                     </div>
-                    <p className="mt-1 text-xs text-white/60">
+                    <p className="mt-1 text-xs text-muted-foreground dark:text-white/60">
                       Propiedades en renta para vivir o invertir
                     </p>
-                    <div className="mt-2 flex items-center justify-between gap-2">
+                    <div className="mt-2 flex flex-wrap items-center justify-between gap-2">
                       <span className="text-xs font-semibold">
                         Desde $5,000 MXN/mes
                       </span>
                       <Button
                         asChild
-                        className="h-9 rounded-md border border-white/30 bg-white/10 px-4 text-xs font-semibold text-white backdrop-blur-sm hover:bg-white/20"
+                        className="group h-9 w-full rounded-md border border-foreground/30 bg-foreground/10 px-4 text-xs font-semibold text-foreground backdrop-blur-sm hover:bg-foreground/20 sm:w-auto"
                       >
                         <Link
                           href="/propiedades?tipo=rentas"
@@ -522,7 +509,7 @@ export default function HomePage() {
                         >
                           <Search className="mr-2 size-4" />
                           Buscar catálogo
-                          <ArrowRight className="ml-2 size-4" />
+                          <ArrowRight className="ml-2 size-4 transition-transform duration-300 group-hover:translate-x-1" />
                         </Link>
                       </Button>
                     </div>
@@ -535,11 +522,11 @@ export default function HomePage() {
           <div className="mt-12">
             <Button
               asChild
-              className="h-9 w-fit rounded-md border border-white/30 bg-white/10 px-4 text-xs font-semibold text-white backdrop-blur-sm hover:bg-white/20"
+              className="group h-9 w-fit rounded-md border border-foreground/30 bg-foreground/10 px-4 text-xs font-semibold text-foreground backdrop-blur-sm hover:bg-foreground/20"
             >
               <Link href="/propiedades" className="no-underline">
                 Ver propiedades
-                <ArrowRight className="ml-2 size-4" />
+                <ArrowRight className="ml-2 size-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
             </Button>
           </div>
@@ -553,14 +540,16 @@ export default function HomePage() {
         initial="hidden"
         animate={propertiesInView ? "visible" : "hidden"}
         variants={staggerContainer}
-        className="py-14"
+        className="scroll-mt-24 py-14"
       >
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center justify-between mb-10 gap-4">
             <div>
-              <motion.h2 variants={fadeInUp} className="text-3xl font-bold tracking-tight">
-                Propiedades Destacadas
-              </motion.h2>
+              <BlurIn>
+                <h2 className="text-3xl font-bold tracking-tight">
+                  Propiedades Destacadas
+                </h2>
+              </BlurIn>
               <p className="text-muted-foreground mt-1">
                 Catálogo de propiedades destacadas en Mérida, Yucatán. 
               </p>
@@ -594,7 +583,7 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.15 }}
                 transition={{ duration: 0.5, delay: index * 0.06 }}
-                className={`group relative mb-4 break-inside-avoid overflow-hidden rounded-xl ${
+                className={`group relative mb-4 min-h-[16rem] break-inside-avoid overflow-hidden rounded-xl ${
                   PROPERTY_CARD_ASPECTS[index % PROPERTY_CARD_ASPECTS.length]
                 }`}
               >
@@ -610,7 +599,7 @@ export default function HomePage() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/20" />
 
-                <div className="relative flex h-full flex-col justify-between p-6">
+                <div className="relative flex h-full flex-col justify-between p-4 sm:p-6">
                   <div className="flex items-center gap-2">
                     <span className="text-sm font-bold uppercase tracking-[0.12em] text-white">
                       {property.type}
@@ -627,10 +616,10 @@ export default function HomePage() {
                       <MapPin className="size-3.5" aria-hidden />
                       {property.zone}
                     </div>
-                    <h3 className="mt-1.5 text-xl font-semibold leading-snug tracking-tight text-white md:text-2xl">
+                    <h3 className="mt-1.5 text-lg font-semibold leading-snug tracking-tight text-white sm:text-xl md:text-2xl">
                       {property.title}
                     </h3>
-                    <p className="mt-2 text-lg font-bold text-white">
+                    <p className="mt-2 text-base font-bold text-white sm:text-lg">
                       {property.price}
                     </p>
 
@@ -653,11 +642,11 @@ export default function HomePage() {
 
                     <Button
                       onClick={() => handlePropertyWhatsApp(property)}
-                      className="mt-4 h-9 w-fit rounded-md border border-white/30 bg-white/10 px-4 text-xs font-semibold text-white backdrop-blur-sm hover:bg-white/20"
+                      className="group mt-4 h-9 w-fit rounded-md border border-white/30 bg-white/10 px-4 text-xs font-semibold text-white backdrop-blur-sm hover:bg-white/20"
                     >
                       <MessageCircle className="mr-2 size-4" />
                       Consultar por WhatsApp
-                      <ArrowRight className="ml-2 size-4" />
+                      <ArrowRight className="ml-2 size-4 transition-transform duration-300 group-hover:translate-x-1" />
                     </Button>
                   </div>
                 </div>
@@ -674,25 +663,24 @@ export default function HomePage() {
         initial="hidden"
         animate={expertiseInView ? "visible" : "hidden"}
         variants={staggerContainer}
-        className="relative overflow-hidden text-white"
+        className="scroll-mt-24 relative overflow-hidden text-foreground"
       >
-        <div aria-hidden className="absolute inset-0 ws-black-surface"></div>
+        <div aria-hidden className="absolute inset-0 hidden dark:block ws-black-surface"></div>
         <div className="relative z-10 flex items-center justify-center px-4 py-16">
           <div className="max-w-[1100px] w-full">
-            <motion.div
-              variants={fadeInUp}
-              className="flex flex-col items-center text-center mb-10"
-            >
-              <span className="text-sm text-slate-50 border border-zinc-800 px-5 py-1 rounded-full">
+            <div className="flex flex-col items-center text-center mb-10">
+              <span className="text-sm text-foreground border border-border px-5 py-1 rounded-full dark:text-slate-50 dark:border-zinc-800">
                 Asesoría
               </span>
-              <h2 className="text-4xl font-medium text-white mt-5">
-                ¿Por qué asesorarte con WS?
-              </h2>
-              <p className="text-sm text-white mt-2 max-w-xl">
+              <BlurIn>
+                <h2 className="text-4xl font-medium text-foreground mt-5">
+                  ¿Por qué asesorarte con WS?
+                </h2>
+              </BlurIn>
+              <p className="text-sm text-muted-foreground dark:text-white mt-2 max-w-xl">
                 No solo publicamos propiedades; construimos relaciones de confianza con un servicio integral, transparente y profesional.
               </p>
-            </motion.div>
+            </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
               {[
@@ -733,16 +721,16 @@ export default function HomePage() {
                     className="w-full object-cover rounded-2xl mb-5 transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="flex items-center gap-4 mb-2">
-                    <p className="text-xs text-zinc-200">{item.tag}</p>
+                    <p className="text-xs text-muted-foreground dark:text-zinc-200">{item.tag}</p>
                     <div className="flex items-center gap-2">
-                      <item.icon className="size-3 text-zinc-300" aria-hidden />
-                      <span className="text-xs text-zinc-200">{item.note}</span>
+                      <item.icon className="size-3 text-muted-foreground dark:text-zinc-300" aria-hidden />
+                      <span className="text-xs text-muted-foreground dark:text-zinc-200">{item.note}</span>
                     </div>
                   </div>
-                  <h3 className="text-base/6 font-medium text-white max-w-2xs">
+                  <h3 className="text-base/6 font-medium text-foreground max-w-2xs">
                     {item.title}
                   </h3>
-                  <p className="mt-2 text-sm/5 font-light text-zinc-300">
+                  <p className="mt-2 text-sm/5 font-light text-muted-foreground dark:text-zinc-300">
                     {item.description}
                   </p>
                 </motion.div>
@@ -752,24 +740,10 @@ export default function HomePage() {
             <div className="flex justify-center mt-12">
               <Link
                 href="/sobre-nosotros"
-                className="flex items-center gap-2 text-sm text-white border border-zinc-800 px-4 py-2 rounded-lg transition-colors group"
+                className="group flex items-center gap-2 rounded-lg border border-border px-4 py-2 text-sm font-semibold text-foreground transition-colors hover:bg-foreground/5 dark:border-zinc-800 dark:text-white"
               >
                 Conoce nuestra asesoría
-                <svg
-                  className="transition-transform duration-300 group-hover:translate-x-1"
-                  width="11"
-                  height="11"
-                  viewBox="0 0 11 11"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M.5 5.164h9.333M5.167.5l4.666 4.667-4.666 4.666"
-                    stroke="#fff"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+                <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden />
               </Link>
             </div>
           </div>
@@ -777,7 +751,7 @@ export default function HomePage() {
       </motion.section>
 
       {/* Presencia — Cobe globe */}
-      <section id="cifras" className="py-20 bg-background">
+      <section id="cifras" className="scroll-mt-24 py-20">
         <div className="container mx-auto px-4">
           <h2 className="text-center text-3xl md:text-4xl font-bold tracking-tight">
             Presencia y Origen de Nuestros Compradores
@@ -789,7 +763,7 @@ export default function HomePage() {
       </section>
 
       {/* Testimonials */}
-      <section id="testimonials" className="py-20 bg-secondary/40">
+      <section id="testimonials" className="scroll-mt-24 py-20">
         <div className="container mx-auto px-4 max-w-5xl">
           <Testimonials
             title="Lo que dicen nuestros clientes"
@@ -806,17 +780,19 @@ export default function HomePage() {
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
         variants={staggerContainer}
-        className="py-20 bg-background"
+        className="scroll-mt-24 py-20"
       >
         <div className="container mx-auto px-4">
-          <motion.div variants={fadeInUp} className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
-              Nuestro Equipo
-            </h2>
+          <div className="text-center mb-16">
+            <BlurIn>
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+                Nuestro Equipo
+              </h2>
+            </BlurIn>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               Profesionales comprometidos con la excelencia y la confianza de nuestros clientes.
             </p>
-          </motion.div>
+          </div>
 
           <div className="mx-auto grid max-w-4xl grid-cols-1 justify-items-center gap-6 md:grid-cols-2">
             <TestimonialCard
@@ -867,7 +843,7 @@ export default function HomePage() {
       </motion.section>
 
       {/* Formulario */}
-      <section id="formulario" className="py-20 bg-secondary/40">
+      <section id="formulario" className="scroll-mt-24 py-20">
         <div className="container mx-auto px-4 max-w-2xl">
           <div className="text-center mb-10">
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
@@ -888,40 +864,47 @@ export default function HomePage() {
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
         variants={staggerContainer}
-        className="ws-grain ws-grain-fade py-20"
+        className="scroll-mt-24 ws-grain ws-grain-fade py-20"
       >
-        <div className="container mx-auto px-4 text-center">
-          <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold text-white mb-6">
+        <div className="relative z-10 container mx-auto px-4 text-center">
+          <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold text-foreground mb-6">
             ¿Listo para empezar?
           </motion.h2>
-          <motion.p variants={fadeInUp} className="text-[#B4B6BC] max-w-2xl mx-auto mb-10 text-lg">
+          <motion.p variants={fadeInUp} className="text-muted-foreground dark:text-[#B4B6BC] max-w-2xl mx-auto mb-10 text-lg">
             Contáctanos hoy y recibe asesoría personalizada para tu operación inmobiliaria.
           </motion.p>
 
           <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button
-              onClick={() => window.open('https://wa.me/529992284783', '_blank')}
-              className="h-9 w-64 sm:flex-1 sm:max-w-[260px] rounded-md border border-white/30 bg-white/10 px-4 text-xs font-semibold text-white backdrop-blur-sm hover:bg-white/20"
+              asChild
+              className="group h-9 w-64 sm:flex-1 sm:max-w-[260px] rounded-md border border-foreground/30 bg-foreground/10 px-4 text-xs font-semibold text-foreground backdrop-blur-sm hover:bg-foreground/20"
             >
-              <MessageCircle className="mr-2 size-4" />
-              Contacto
-              <ArrowRight className="ml-2 size-4" />
+              <a
+                href="https://wa.me/529992284783"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="no-underline"
+              >
+                <MessageCircle className="mr-2 size-4" />
+                Contacto
+                <ArrowRight className="ml-2 size-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </a>
             </Button>
             <Button
               onClick={() => setAdvisorOpen(true)}
-              className="h-9 w-64 sm:flex-1 sm:max-w-[260px] rounded-md border border-white/30 bg-white/10 px-4 text-xs font-semibold text-white backdrop-blur-sm hover:bg-white/20"
+              className="group h-9 w-64 sm:flex-1 sm:max-w-[260px] rounded-md border border-foreground/30 bg-foreground/10 px-4 text-xs font-semibold text-foreground backdrop-blur-sm hover:bg-foreground/20"
             >
               <Building className="mr-2 size-4" />
               Vender mi propiedad
-              <ArrowRight className="ml-2 size-4" />
+              <ArrowRight className="ml-2 size-4 transition-transform duration-300 group-hover:translate-x-1" />
             </Button>
             <Button
               onClick={() => setAdvisorOpen(true)}
-              className="h-9 w-64 sm:flex-1 sm:max-w-[260px] rounded-md border border-white/30 bg-white/10 px-4 text-xs font-semibold text-white backdrop-blur-sm hover:bg-white/20"
+              className="group h-9 w-64 sm:flex-1 sm:max-w-[260px] rounded-md border border-foreground/30 bg-foreground/10 px-4 text-xs font-semibold text-foreground backdrop-blur-sm hover:bg-foreground/20"
             >
               <Home className="mr-2 size-4" />
               Rentar mi propiedad
-              <ArrowRight className="ml-2 size-4" />
+              <ArrowRight className="ml-2 size-4 transition-transform duration-300 group-hover:translate-x-1" />
             </Button>
           </motion.div>
         </div>

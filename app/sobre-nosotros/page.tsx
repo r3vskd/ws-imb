@@ -317,11 +317,11 @@ export default function SobreNosotrosPage() {
             <div className="flex justify-center mt-12">
               <Button
                 asChild
-                className="h-9 w-fit rounded-md border border-white/30 bg-white/10 px-4 text-xs font-semibold text-white backdrop-blur-sm hover:bg-white/20"
+                className="group h-9 w-fit rounded-md border border-white/30 bg-white/10 px-4 text-xs font-semibold text-white backdrop-blur-sm hover:bg-white/20"
               >
                 <Link href="/contact" className="no-underline">
                   Hablemos de tu propiedad
-                  <ArrowRight className="ml-2 size-4" />
+                  <ArrowRight className="ml-2 size-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </Link>
               </Button>
             </div>
@@ -349,7 +349,7 @@ export default function SobreNosotrosPage() {
             variants={fadeInUp}
             className="overflow-x-auto rounded-2xl border border-border bg-card"
           >
-            <table className="w-full text-sm text-left">
+            <table className="w-full min-w-[42rem] text-sm text-left">
               <thead>
                 <tr className="border-b border-border">
                   <th className="p-4 w-36" />
@@ -436,12 +436,12 @@ export default function SobreNosotrosPage() {
           <motion.div variants={fadeInUp}>
             <Button
               asChild
-              className="h-9 rounded-md border border-white/30 bg-white/10 px-4 text-xs font-semibold text-white backdrop-blur-sm hover:bg-white/20"
+              className="group h-9 rounded-md border border-white/30 bg-white/10 px-4 text-xs font-semibold text-white backdrop-blur-sm hover:bg-white/20"
             >
               <Link href="/contact" className="no-underline">
                 <MessageCircle className="mr-2 size-4" />
                 Contacto
-                <ArrowRight className="ml-2 size-4" />
+                <ArrowRight className="ml-2 size-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
             </Button>
           </motion.div>

@@ -65,11 +65,11 @@ export default function ImagesReveal({
       <h2 className="paseo-display text-center text-2xl font-semibold text-white">
         {title}
       </h2>
-      <div className="relative my-10 ml-11 flex flex-row justify-center md:ml-24">
+      <div className="relative my-10 flex flex-wrap justify-center gap-2 px-2 sm:ml-11 sm:flex-nowrap sm:gap-0 sm:px-0 md:ml-24">
         {images.map((image, i) => (
           <motion.img
             key={i}
-            className="relative -ml-11 size-24 cursor-pointer rounded-2xl border-[6px] border-white object-cover shadow-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white md:-ml-24 md:size-44"
+            className="relative size-20 cursor-pointer rounded-2xl border-[6px] border-white object-cover shadow-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:-ml-11 sm:size-24 md:-ml-24 md:size-44"
             src={image.src}
             alt={image.alt}
             role="button"

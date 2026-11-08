@@ -8,22 +8,43 @@ interface BlurInTextProps {
   className?: string
 }
 
+const blurInVariants = {
+  hidden: { filter: "blur(10px)", opacity: 0 },
+  visible: { filter: "blur(0px)", opacity: 1 },
+}
+
+export const BlurIn = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode
+  className?: string
+}) => {
+  return (
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.6 }}
+      transition={{ duration: 1 }}
+      variants={blurInVariants}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  )
+}
+
 export const BlurInText: React.FC<BlurInTextProps> = ({
   text = "",
   className = "",
 }) => {
-  const variants1 = {
-    hidden: { filter: "blur(10px)", opacity: 0 },
-    visible: { filter: "blur(0px)", opacity: 1 },
-  }
-
   return (
     <motion.h1
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.6 }}
       transition={{ duration: 1 }}
-      variants={variants1}
+      variants={blurInVariants}
       className={clsx(
         "font-display text-center font-bold drop-shadow-sm",
         "text-4xl md:text-5xl lg:text-6xl xl:text-7xl",

@@ -86,25 +86,25 @@
     color-scheme: light;
     --font-sans: "Geist";
     --font-heading: "Geist";
-    --background: 240 6% 97%;
+    --background: 40 45% 94%;
     --foreground: 240 5% 10%;
-    --card: 0 0% 100%;
+    --card: 40 45% 98%;
     --card-foreground: 240 5% 10%;
-    --popover: 0 0% 100%;
+    --popover: 40 45% 98%;
     --popover-foreground: 240 5% 10%;
     --primary: 265 45% 45%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 240 5% 93%;
+    --secondary: 38 30% 90%;
     --secondary-foreground: 240 5% 12%;
-    --muted: 240 5% 93%;
-    --muted-foreground: 240 4% 38%;
+    --muted: 38 30% 91%;
+    --muted-foreground: 30 8% 36%;
     --accent: 265 40% 94%;
     --accent-foreground: 265 45% 32%;
     --destructive: 0 72% 45%;
     --destructive-foreground: 0 0% 100%;
-    --border: 240 5% 88%;
-    --input: 240 5% 88%;
-    --ring: 265 45% 45%;
+    --border: 36 18% 84%;
+    --input: 36 18% 84%;
+    --ring: 240 5% 26%;
     --chart-1: 265 45% 45%;
     --chart-2: 240 5% 30%;
     --chart-3: 240 4% 55%;
@@ -152,7 +152,7 @@
     --destructive-foreground: 0 0% 98%;
     --border: 240 3% 20%;
     --input: 240 3% 20%;
-    --ring: 265 62% 83%;
+    --ring: 240 5% 64%;
     --chart-1: 265 62% 83%;
     --chart-2: 240 4% 70%;
     --chart-3: 240 4% 50%;
@@ -190,6 +190,44 @@
   *::after {
     transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
   }
+}
+
+/* ===== Light mode: cream granulated page ===== */
+html:not(.dark) {
+  background-color: #f5f0e6;
+  background-image:
+    radial-gradient(65% 50% at 12% 6%, rgba(255, 253, 248, 0.9) 0%, rgba(255, 253, 248, 0) 62%),
+    radial-gradient(55% 45% at 88% 10%, rgba(233, 222, 205, 0.5) 0%, rgba(233, 222, 205, 0) 65%),
+    radial-gradient(75% 60% at 50% 102%, rgba(240, 231, 217, 0.7) 0%, rgba(240, 231, 217, 0) 70%),
+    linear-gradient(180deg, #fbf8f2 0%, #f5efe4 48%, #efe7da 100%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+html:not(.dark) body {
+  background: transparent;
+}
+
+html:not(.dark) body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.085;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Light mode keeps the landing as one continuous cream surface. */
+html:not(.dark) .landing-page .ws-grain {
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+html:not(.dark) .landing-page .ws-grain::after,
+html:not(.dark) .landing-page .ws-grain-fade::before {
+  display: none;
 }
 
 /* ===== Dark mode: fondo uniforme grafito granulado ===== */

@@ -6,10 +6,22 @@ import { usePathname, useRouter } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
-import { Menu, X } from 'lucide-react'
+import { ArrowRight, Menu, X } from 'lucide-react'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/cuicui/mac-os-dropdown"
+
+const navButtonClass =
+  "group flex items-center gap-2 rounded-lg bg-white/40 px-4 py-2 text-sm font-semibold text-foreground backdrop-blur-xl transition-colors hover:bg-white/55 focus:outline-none focus-visible:ring-2 focus-visible:ring-foreground/30 dark:bg-white/10 dark:hover:bg-white/20"
+
+const navArrowClass =
+  "size-4 shrink-0 transition-transform duration-300 group-hover:translate-x-1"
 
 export function Navbar() {
-  const [isOpen, setIsOpen] = React.useState(false)
   const [isScrolled, setIsScrolled] = React.useState(false)
   const pathname = usePathname()
   const router = useRouter()
@@ -24,7 +36,6 @@ export function Navbar() {
   }, [])
 
   const scrollToSection = (id: string) => {
-    setIsOpen(false)
     const element = document.getElementById(id)
     if (element) {
       element.scrollIntoView({ behavior: "smooth" })
@@ -38,163 +49,85 @@ export function Navbar() {
       "fixed top-0 w-full z-50 transition-all duration-300",
       isPropiedades
         ? isScrolled
-          ? "bg-black/90 backdrop-blur-md shadow-sm border-b border-white/25 py-2"
-          : "bg-black py-4"
+          ? "bg-[#F6F1E7]/90 dark:bg-black/90 backdrop-blur-md py-2"
+          : "bg-[#F6F1E7]/85 dark:bg-black py-4"
         : isScrolled
-          ? "bg-black/70 backdrop-blur-2xl shadow-sm py-2"
-          : "bg-black/35 backdrop-blur-lg py-4"
+          ? "bg-[#F6F1E7]/85 dark:bg-black/70 backdrop-blur-2xl py-2"
+          : "bg-[#F6F1E7]/75 dark:bg-black/35 backdrop-blur-lg py-4"
     )}>
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-14">
-          <Link href="/" className="flex items-center space-x-2 no-underline">
-            <img src="/ws-logo.png" alt="WS Asesoría Inmobiliaria" className="h-10 md:h-11 w-auto object-contain transition-all drop-shadow"/>
+        <div className="flex items-center justify-between gap-2 sm:gap-3 h-14">
+          <Link href="/" className="flex shrink-0 items-center no-underline">
+            <img
+              src="/ws-logo.png"
+              alt="WS Asesoría Inmobiliaria"
+              className="h-8 max-w-[64px] w-auto object-contain object-left transition-all drop-shadow invert dark:invert-0 max-[359px]:max-w-[50px] sm:h-10 sm:max-w-none md:h-11"
+            />
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            <button
-              onClick={() => scrollToSection("featured")}
-              className={cn(
-                "text-sm font-semibold transition-colors duration-200 no-underline focus:outline-none",
-                isScrolled && !isPropiedades ? "text-slate-200 hover:text-white" : "text-slate-100 hover:text-white"
-              )}
-            >
-              Categorías
-            </button>
+          <div className="flex min-w-0 items-center gap-1 sm:gap-2">
             <Link
               href="/propiedades"
               className={cn(
-                "text-sm font-semibold transition-colors duration-200 no-underline focus:outline-none",
-                isScrolled && !isPropiedades ? "text-slate-200 hover:text-white" : "text-slate-100 hover:text-white"
+                navButtonClass,
+                "!h-9 !px-2 !py-0 !text-[11px] sm:!h-auto sm:!px-4 sm:!py-2 sm:!text-sm max-[359px]:!h-8 max-[359px]:!px-1.5 max-[359px]:!text-[10px]",
               )}
             >
               Propiedades
+              <ArrowRight className={navArrowClass} aria-hidden />
             </Link>
-            <button
-              onClick={() => scrollToSection("expertise")}
-              className={cn(
-                "text-sm font-semibold transition-colors duration-200 no-underline focus:outline-none",
-                isScrolled && !isPropiedades ? "text-slate-200 hover:text-white" : "text-slate-100 hover:text-white"
-              )}
-            >
-              Expertise
-            </button>
-            <button
-              onClick={() => scrollToSection("testimonials")}
-              className={cn(
-                "text-sm font-semibold transition-colors duration-200 no-underline focus:outline-none",
-                isScrolled && !isPropiedades ? "text-slate-200 hover:text-white" : "text-slate-100 hover:text-white"
-              )}
-            >
-              Testimonios
-            </button>
-            <Link
-              href="/sobre-nosotros"
-              className={cn(
-                "text-sm font-semibold transition-colors duration-200 no-underline focus:outline-none",
-                isScrolled && !isPropiedades ? "text-slate-200 hover:text-white" : "text-slate-100 hover:text-white"
-              )}
-            >
-              Sobre nosotros
-            </Link>
-
-            <ThemeToggle
-              className={cn(
-                isScrolled && !isPropiedades
-                  ? "text-slate-200 hover:text-white hover:bg-white/10"
-                  : "text-slate-100 hover:text-white hover:bg-white/10"
-              )}
-            />
 
             <Button
               asChild
-              className={cn(
-                "rounded-xl px-5 h-10 font-semibold shadow-sm transition-all duration-200 no-underline hover:scale-[1.02] active:scale-[0.98]",
-                isScrolled && !isPropiedades
-                  ? "ws-black-surface text-white hover:bg-[#1b1b1d]"
-                  : "bg-white/15 hover:bg-white/25 text-white border border-white/30 backdrop-blur-sm"
-              )}
-            >
-              <Link href="/paseo" className="no-underline">Paseo</Link>
-            </Button>
-
-            <Button
-              asChild
-              className={cn(
-                "rounded-xl px-5 h-10 font-semibold shadow-sm transition-all duration-200 no-underline hover:scale-[1.02] active:scale-[0.98]",
-                isScrolled && !isPropiedades
-                  ? "ws-black-surface text-white hover:bg-[#1b1b1d]"
-                  : "bg-white/15 hover:bg-white/25 text-white border border-white/30 backdrop-blur-sm"
-              )}
+              className="inline-flex !h-10 !px-2.5 !text-[11px] rounded-xl font-semibold shadow-sm transition-all duration-200 no-underline hover:scale-[1.02] active:scale-[0.98] ws-black-surface text-white hover:bg-[#1b1b1d] sm:!h-10 sm:!px-5 sm:!text-sm max-[359px]:!h-8 max-[359px]:!px-2 max-[359px]:!text-[10px]"
             >
               <Link href="/contact" className="no-underline">Contacto</Link>
             </Button>
-          </nav>
 
-          {/* Mobile Navigation Toggle */}
-          <button
-            className="md:hidden p-2 rounded-lg text-slate-200 hover:text-white focus:outline-none"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="Abrir menú de navegación"
-            aria-expanded={isOpen}
-          >
-            {isOpen ? (
-              <X className={cn("h-6 w-6", isScrolled && !isPropiedades ? "text-slate-900 dark:text-white" : "text-white")} />
-            ) : (
-              <Menu className={cn("h-6 w-6", isScrolled && !isPropiedades ? "text-slate-900 dark:text-white" : "text-white")} />
-            )}
-          </button>
-        </div>
+            {/* Cuicui Mac OS dropdown — always present */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button
+                  type="button"
+                  className="group inline-flex h-10 w-10 items-center justify-center rounded-lg text-foreground hover:bg-foreground/5 focus:outline-none max-[359px]:h-8 max-[359px]:w-8"
+                  aria-label="Abrir menú de navegación"
+                >
+                  <Menu className="h-6 w-6 group-data-[state=open]:hidden max-[359px]:h-5 max-[359px]:w-5" aria-hidden />
+                  <X className="hidden h-6 w-6 group-data-[state=open]:block max-[359px]:h-5 max-[359px]:w-5" aria-hidden />
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" sideOffset={8} className="min-w-40">
+                <DropdownMenuItem
+                  className="py-1.5"
+                  onSelect={() => scrollToSection('featured')}
+                >
+                  Categorías
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  className="py-1.5"
+                  onSelect={() => scrollToSection('testimonials')}
+                >
+                  Testimonios
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  className="py-1.5"
+                  onSelect={() => router.push('/sobre-nosotros')}
+                >
+                  Sobre nosotros
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem
+                  className="py-1.5"
+                  onSelect={() => router.push('/paseo')}
+                >
+                  Paseo
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
 
-        {/* Mobile Navigation Menu */}
-        {isOpen && (
-          <div className="md:hidden absolute top-full left-0 right-0 bg-white dark:bg-slate-950 border-b border-white/40 shadow-xl rounded-b-2xl">
-            <div className="flex flex-col space-y-4 px-6 py-6">
-              <button
-                onClick={() => scrollToSection("featured")}
-                className="text-left text-base font-semibold text-slate-800 dark:text-slate-200 hover:text-blue-600 no-underline"
-              >
-                Categorías
-              </button>
-              <Link
-                href="/propiedades"
-                onClick={() => setIsOpen(false)}
-                className="text-left text-base font-semibold text-slate-800 dark:text-slate-200 hover:text-blue-600 no-underline"
-              >
-                Propiedades
-              </Link>
-              <button
-                onClick={() => scrollToSection("expertise")}
-                className="text-left text-base font-semibold text-slate-800 dark:text-slate-200 hover:text-blue-600 no-underline"
-              >
-                Expertise
-              </button>
-              <button
-                onClick={() => scrollToSection("testimonials")}
-                className="text-left text-base font-semibold text-slate-800 dark:text-slate-200 hover:text-blue-600 no-underline"
-              >
-                Testimonios
-              </button>
-              <Link
-                href="/sobre-nosotros"
-                onClick={() => setIsOpen(false)}
-                className="text-left text-base font-semibold text-slate-800 dark:text-slate-200 hover:text-blue-600 no-underline"
-              >
-                Sobre nosotros
-              </Link>
-              <div className="flex items-center justify-between">
-                <span className="text-base font-semibold text-slate-800 dark:text-slate-200">Apariencia</span>
-                <ThemeToggle className="text-slate-800 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800" />
-              </div>
-              <Button asChild className="w-full ws-black-surface text-white hover:bg-[#1b1b1d] rounded-xl h-11 font-semibold no-underline">
-                <Link href="/paseo" onClick={() => setIsOpen(false)} className="no-underline">Paseo</Link>
-              </Button>
-              <Button asChild className="w-full ws-black-surface text-white hover:bg-[#1b1b1d] rounded-xl h-11 font-semibold no-underline">
-                <Link href="/contact" onClick={() => setIsOpen(false)} className="no-underline">Contacto</Link>
-              </Button>
-            </div>
+            <ThemeToggle className="h-9 w-9 rounded-xl text-foreground max-[359px]:h-8 max-[359px]:w-8" />
           </div>
-        )}
+        </div>
       </div>
     </header>
   )
