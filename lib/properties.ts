@@ -16,6 +16,39 @@ export interface Property {
   featured?: boolean
 }
 
+export type PropertyAmenity =
+  | 'mascotas-permitidas'
+  | 'dos-plantas'
+  | 'piscina'
+  | 'acceso-discapacitados'
+  | 'aire-acondicionado'
+
+export const PROPERTY_AMENITIES: { value: PropertyAmenity; label: string }[] = [
+  { value: 'mascotas-permitidas', label: 'Mascotas permitidas' },
+  { value: 'dos-plantas', label: 'Dos plantas' },
+  { value: 'piscina', label: 'Piscina' },
+  { value: 'acceso-discapacitados', label: 'Acceso discapacitados' },
+  { value: 'aire-acondicionado', label: 'Aire acondicionado' },
+]
+
+const AMENITY_MATCHERS: Record<PropertyAmenity, (p: Property) => boolean> = {
+  'mascotas-permitidas': (p) =>
+    p.highlights.some((h) => /pets/i.test(h) && !/no/i.test(h)),
+  'dos-plantas': (p) =>
+    /dos niveles|dos plantas|planta alta|2 niveles|dos pisos|Dos niveles|P\.A/i.test(
+      `${p.description} ${p.title}`,
+    ),
+  'piscina': (p) =>
+    /piscina|alberca/i.test(`${p.description} ${p.highlights.join(' ')}`),
+  'acceso-discapacitados': (p) =>
+    p.highlights.some((h) => /accessibility|disabledaccess|accesibility/i.test(h)),
+  'aire-acondicionado': (p) =>
+    p.highlights.some((h) => /airconditioner|evaporativecooler|air conditioning/i.test(h)),
+}
+
+export const propertyHasAmenity = (p: Property, amenity: PropertyAmenity) =>
+  AMENITY_MATCHERS[amenity](p)
+
 export type PropertyCategory =
   | 'casas'
   | 'departamentos'

@@ -29,6 +29,8 @@ import {
   InputGroupTextarea,
 } from "@/components/ui/input-group"
 import { trackMetaEvent } from "@/components/analytics/meta-pixel"
+import { useLocale } from "@/lib/i18n"
+import { dict } from "@/lib/i18n-dict"
 import { ArrowRight, CheckCircle2, MessageCircle, Send } from "lucide-react"
 
 const FormSchema = v.object({
@@ -67,13 +69,18 @@ const wordCount = (value: string) =>
 
 export function ContactForm({
   className,
-  title = "Escríbenos",
-  description = "Déjanos tus datos y recibe asesoría inmobiliaria personalizada.",
+  title,
+  description,
 }: {
   className?: string
   title?: string
   description?: string
 }) {
+  const { locale } = useLocale()
+  const c = dict.contact
+  const resolvedTitle = title ?? c.titulo[locale]
+  const resolvedDescription = description ?? c.subtitulo[locale]
+
   const form = useForm({
     schema: FormSchema,
     initialInput,
@@ -112,9 +119,7 @@ export function ContactForm({
       })
       setSent(output)
     } catch {
-      setError(
-        "Hubo un error al enviar. Intenta de nuevo o contáctanos por WhatsApp.",
-      )
+      setError(c.error[locale])
     } finally {
       setSending(false)
     }
@@ -132,15 +137,14 @@ export function ContactForm({
         <CardContent className="flex flex-col items-center gap-4 py-10 text-center">
           <CheckCircle2 className="h-12 w-12 text-foreground" aria-hidden />
           <h2 className="text-2xl font-bold text-foreground">
-            ¡Mensaje Recibido!
+            {c.successTitulo[locale]}
           </h2>
           <p className="max-w-md text-sm text-muted-foreground">
-            Gracias por ponerte en contacto. Si deseas respuesta inmediata por
-            WhatsApp, presiona el botón a continuación.
+            {c.successDesc[locale]}
           </p>
           <Button
             asChild
-            className="group mt-2 h-9 rounded-md border border-foreground/30 bg-foreground/10 px-4 text-xs font-semibold text-foreground backdrop-blur-sm hover:bg-foreground/20 dark:border-white/30 dark:bg-white/10 dark:text-white dark:hover:bg-white/20"
+            className="group mt-2 h-9 rounded-md border-0 bg-foreground/10 px-4 text-xs font-semibold text-foreground backdrop-blur-sm hover:bg-foreground/20 dark:bg-white/10 dark:text-white dark:hover:bg-white/20"
           >
             <a
               href={whatsappUrl}
@@ -149,7 +153,7 @@ export function ContactForm({
               className="no-underline"
             >
               <MessageCircle className="mr-2 size-4" aria-hidden />
-              Continuar por WhatsApp
+              {c.successCta[locale]}
               <ArrowRight className="ml-2 size-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden />
             </a>
           </Button>
@@ -161,8 +165,8 @@ export function ContactForm({
   return (
     <Card className={className}>
       <CardHeader>
-        <CardTitle>{title}</CardTitle>
-        <CardDescription>{description}</CardDescription>
+        <CardTitle>{resolvedTitle}</CardTitle>
+        <CardDescription>{resolvedDescription}</CardDescription>
       </CardHeader>
       <CardContent>
         <Form of={form} id="contact-form" onSubmit={handleSubmit}>
@@ -171,13 +175,13 @@ export function ContactForm({
               <FormischField of={form} path={["nombre"]}>
                 {(field) => (
                   <Field data-invalid={field.errors !== null}>
-                    <FieldLabel htmlFor="contact-nombre">Nombre</FieldLabel>
+                    <FieldLabel htmlFor="contact-nombre">{c.nombre[locale]}</FieldLabel>
                     <Input
                       {...field.props}
                       id="contact-nombre"
                       value={field.input ?? ""}
                       aria-invalid={field.errors !== null}
-                      placeholder="Tu nombre"
+                      placeholder={c.nombrePh[locale]}
                       autoComplete="given-name"
                     />
                     {field.errors && (
@@ -192,13 +196,13 @@ export function ContactForm({
               <FormischField of={form} path={["apellido"]}>
                 {(field) => (
                   <Field data-invalid={field.errors !== null}>
-                    <FieldLabel htmlFor="contact-apellido">Apellido</FieldLabel>
+                    <FieldLabel htmlFor="contact-apellido">{c.apellido[locale]}</FieldLabel>
                     <Input
                       {...field.props}
                       id="contact-apellido"
                       value={field.input ?? ""}
                       aria-invalid={field.errors !== null}
-                      placeholder="Tu apellido"
+                      placeholder={c.apellidoPh[locale]}
                       autoComplete="family-name"
                     />
                     {field.errors && (
@@ -216,14 +220,14 @@ export function ContactForm({
                 {(field) => (
                   <Field data-invalid={field.errors !== null}>
                     <FieldLabel htmlFor="contact-telefono">
-                      Número de teléfono
+                      {c.telefono[locale]}
                     </FieldLabel>
                     <Input
                       {...field.props}
                       id="contact-telefono"
                       value={field.input ?? ""}
                       aria-invalid={field.errors !== null}
-                      placeholder="Ej. +52 999 123 4567"
+                      placeholder={c.telefonoPh[locale]}
                       autoComplete="tel"
                     />
                     {field.errors && (
@@ -239,7 +243,7 @@ export function ContactForm({
                 {(field) => (
                   <Field data-invalid={field.errors !== null}>
                     <FieldLabel htmlFor="contact-correo">
-                      Correo electrónico
+                      {c.correo[locale]}
                     </FieldLabel>
                     <Input
                       {...field.props}
@@ -247,7 +251,7 @@ export function ContactForm({
                       type="email"
                       value={field.input ?? ""}
                       aria-invalid={field.errors !== null}
-                      placeholder="tu@correo.com"
+                      placeholder={c.correoPh[locale]}
                       autoComplete="email"
                     />
                     {field.errors && (
@@ -264,13 +268,13 @@ export function ContactForm({
               <FormischField of={form} path={["ciudad"]}>
                 {(field) => (
                   <Field data-invalid={field.errors !== null}>
-                    <FieldLabel htmlFor="contact-ciudad">Ciudad</FieldLabel>
+                    <FieldLabel htmlFor="contact-ciudad">{c.ciudad[locale]}</FieldLabel>
                     <Input
                       {...field.props}
                       id="contact-ciudad"
                       value={field.input ?? ""}
                       aria-invalid={field.errors !== null}
-                      placeholder="Ej. Mérida, CDMX, Monterrey"
+                      placeholder={c.ciudadPh[locale]}
                       autoComplete="address-level2"
                     />
                     {field.errors && (
@@ -285,13 +289,13 @@ export function ContactForm({
               <FormischField of={form} path={["pais"]}>
                 {(field) => (
                   <Field data-invalid={field.errors !== null}>
-                    <FieldLabel htmlFor="contact-pais">País</FieldLabel>
+                    <FieldLabel htmlFor="contact-pais">{c.pais[locale]}</FieldLabel>
                     <Input
                       {...field.props}
                       id="contact-pais"
                       value={field.input ?? ""}
                       aria-invalid={field.errors !== null}
-                      placeholder="Ej. México"
+                      placeholder={c.paisPh[locale]}
                       autoComplete="country-name"
                     />
                     {field.errors && (
@@ -307,26 +311,25 @@ export function ContactForm({
             <FormischField of={form} path={["mensaje"]}>
               {(field) => (
                 <Field data-invalid={field.errors !== null}>
-                  <FieldLabel htmlFor="contact-mensaje">Mensaje</FieldLabel>
+                  <FieldLabel htmlFor="contact-mensaje">{c.mensaje[locale]}</FieldLabel>
                   <InputGroup>
                     <InputGroupTextarea
                       {...field.props}
                       id="contact-mensaje"
                       value={field.input ?? ""}
                       aria-invalid={field.errors !== null}
-                      placeholder="Cuéntanos qué tipo de propiedad buscas o qué propiedad deseas vender/rentar"
+                      placeholder={c.mensajePh[locale]}
                       rows={6}
                       className="min-h-24 resize-none"
                     />
                     <InputGroupAddon align="block-end">
                       <InputGroupText className="tabular-nums">
-                        {wordCount(field.input ?? "")} / 200 palabras
+                        {wordCount(field.input ?? "")} / 200 {c.palabras[locale]}
                       </InputGroupText>
                     </InputGroupAddon>
                   </InputGroup>
                   <FieldDescription>
-                    Máximo 200 palabras. La información se confirma directamente
-                    con WS Asesoría Inmobiliaria.
+                    {c.mensajeHelp[locale]}
                   </FieldDescription>
                   {field.errors && (
                     <FieldError
@@ -344,18 +347,18 @@ export function ContactForm({
           <Button
             type="button"
             onClick={() => reset(form)}
-            className="h-9 w-full rounded-md border border-foreground/30 bg-foreground/10 px-4 text-xs font-semibold text-foreground backdrop-blur-sm hover:bg-foreground/20 dark:border-white/30 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 sm:w-auto"
+            className="h-9 w-full rounded-md border-0 bg-foreground/10 px-4 text-xs font-semibold text-foreground backdrop-blur-sm hover:bg-foreground/20 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 sm:w-auto"
           >
-            Restablecer
+            {c.restablecer[locale]}
           </Button>
           <Button
             type="submit"
             form="contact-form"
             disabled={sending}
-            className="group h-9 w-full rounded-md border border-foreground/30 bg-foreground/10 px-4 text-xs font-semibold text-foreground backdrop-blur-sm hover:bg-foreground/20 dark:border-white/30 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 sm:w-auto"
+            className="group h-9 w-full rounded-md border-0 bg-foreground/10 px-4 text-xs font-semibold text-foreground backdrop-blur-sm hover:bg-foreground/20 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 sm:w-auto"
           >
             <Send className="mr-2 size-4" aria-hidden />
-            {sending ? "Enviando..." : "Enviar Formulario"}
+            {sending ? c.enviando[locale] : c.enviar[locale]}
             <ArrowRight className="ml-2 size-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden />
           </Button>
         </div>

@@ -1,7 +1,14 @@
+"use client"
+
 import { ArrowRight, Facebook, Instagram, Mail, Phone, MapPin } from 'lucide-react'
 import Link from "next/link"
+import { useLocale } from "@/lib/i18n"
+import { dict } from "@/lib/i18n-dict"
 
 export function Footer() {
+  const { locale } = useLocale()
+  const t = dict.footer
+
   return (
     <footer className="border-t border-transparent bg-transparent text-muted-foreground dark:border-border">
       <div className="container px-6 py-12 mx-auto">
@@ -10,23 +17,20 @@ export function Footer() {
           {/* Sobre Nosotros */}
           <div>
             <h3 className="text-base font-bold text-foreground tracking-wide">
-              Sobre Nosotros
+              {t.sobre[locale]}
             </h3>
 
             <p className="mt-3 text-xs text-muted-foreground leading-relaxed font-light">
-              Nos dedicamos a brindar servicios de asesoría inmobiliaria
-              excepcionales, guiándote en todo el proceso para encontrar tu
-              propiedad perfecta en Mérida, Yucatán.
+              {t.sobreDesc[locale]}
               <br /><br />
-              Nuestro catálogo de propiedades es cuidadosamente seleccionado
-              para garantizar calidad, certeza jurídica y plusvalía.
+              {t.sobreDesc2[locale]}
             </p>
           </div>
 
           {/* Recursos */}
           <div>
             <h3 className="text-base font-bold text-foreground tracking-wide">
-              Recursos
+              {t.recursos[locale]}
             </h3>
 
             <div className="flex flex-col mt-3 space-y-2 text-xs font-medium">
@@ -34,21 +38,21 @@ export function Footer() {
                 href="/propiedades"
                 className="no-underline text-muted-foreground hover:text-foreground transition-colors"
               >
-                Propiedades
+                {dict.nav.propiedades[locale]}
               </Link>
 
               <Link
                 href="/sobre-nosotros"
                 className="no-underline text-muted-foreground hover:text-foreground transition-colors"
               >
-                Sobre nosotros
+                {dict.nav.sobreNosotros[locale]}
               </Link>
 
               <Link
                 href="/contact"
                 className="no-underline text-muted-foreground hover:text-foreground transition-colors"
               >
-                Contacto
+                {dict.nav.contacto[locale]}
               </Link>
             </div>
           </div>
@@ -56,7 +60,7 @@ export function Footer() {
           {/* Información de Contacto */}
           <div>
             <h3 className="text-base font-bold text-foreground tracking-wide">
-              Información de Contacto
+              {t.infoContacto[locale]}
             </h3>
 
             <div className="flex flex-col mt-3 space-y-3 text-xs font-medium text-muted-foreground">
@@ -85,13 +89,9 @@ export function Footer() {
                 <Mail className="w-4 h-4 mr-2 mt-0.5 shrink-0 text-foreground" />
 
                 <div className="flex flex-col gap-1">
-                  <span>
-                    Negocios: ventas@wsinmobiliaria.com
-                  </span>
+                  <span>{t.negocios[locale]}</span>
 
-                  <span>
-                    Información: contacto@wsinmobiliaria.com
-                  </span>
+                  <span>{t.info[locale]}</span>
                 </div>
               </div>
 
@@ -101,7 +101,7 @@ export function Footer() {
           {/* Redes Sociales */}
           <div>
             <h3 className="text-base font-bold text-foreground tracking-wide">
-              Síguenos en Redes
+              {t.redes[locale]}
             </h3>
 
             <div className="mt-3 flex flex-col gap-2">
@@ -111,7 +111,7 @@ export function Footer() {
                 href="https://www.facebook.com/wensavi29/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex w-full items-center gap-2 rounded-lg border border-border px-4 py-2 text-sm font-semibold text-foreground no-underline transition-colors hover:bg-foreground/5"
+                className="group flex w-full items-center gap-2 rounded-lg border-0 px-4 py-2 text-sm font-semibold text-foreground no-underline transition-colors hover:bg-foreground/20"
                 aria-label="Facebook"
               >
                 <Facebook className="w-4 h-4" aria-hidden />
@@ -124,7 +124,7 @@ export function Footer() {
                 href="https://www.instagram.com/wendy_asesoria/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex w-full items-center gap-2 rounded-lg border border-border px-4 py-2 text-sm font-semibold text-foreground no-underline transition-colors hover:bg-foreground/5"
+                className="group flex w-full items-center gap-2 rounded-lg border-0 px-4 py-2 text-sm font-semibold text-foreground no-underline transition-colors hover:bg-foreground/20"
                 aria-label="Instagram"
               >
                 <Instagram className="w-4 h-4" aria-hidden />
@@ -137,7 +137,7 @@ export function Footer() {
                 href="https://www.tiktok.com/@wendysanchezinmobiliaria?_r=1&_t=ZS-923VDKTDEby"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex w-full items-center gap-2 rounded-lg border border-border px-4 py-2 text-sm font-semibold text-foreground no-underline transition-colors hover:bg-foreground/5"
+                className="group flex w-full items-center gap-2 rounded-lg border-0 px-4 py-2 text-sm font-semibold text-foreground no-underline transition-colors hover:bg-foreground/20"
                 aria-label="TikTok"
               >
                 <svg
@@ -161,10 +161,10 @@ export function Footer() {
         <hr className="my-8 border-border hidden dark:block" />
 
         {/* Copyright */}
-        <div className="flex flex-col items-center justify-between sm:flex-row text-xs text-muted-foreground font-medium">
+        <div className="mt-14 flex flex-col items-center justify-between text-xs text-muted-foreground font-medium dark:mt-2 sm:flex-row">
 
           <p>
-            © 2026 WS Asesoría Inmobiliaria. Todos los derechos reservados.
+            © 2026 WS Asesoría Inmobiliaria. {t.derechos[locale]}
           </p>
 
           <div className="flex mt-4 space-x-6 sm:mt-0">
@@ -172,14 +172,14 @@ export function Footer() {
               href="/politicas-de-privacidad"
               className="no-underline text-muted-foreground hover:text-foreground transition-colors"
             >
-              Política de Privacidad
+              {t.privacidad[locale]}
             </Link>
 
             <Link
               href="/terminos-y-condiciones"
               className="no-underline text-muted-foreground hover:text-foreground transition-colors"
             >
-              Términos de Servicio
+              {t.terminos[locale]}
             </Link>
           </div>
 

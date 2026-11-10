@@ -9,6 +9,8 @@ import {
   DialogDescription,
 } from '@/components/ui/dialog'
 import { trackMetaEvent } from '@/components/analytics/meta-pixel'
+import { useLocale } from '@/lib/i18n'
+import { dict, localizePropertyTitle } from '@/lib/i18n-dict'
 
 interface AdvisorSelectorModalProps {
   isOpen: boolean
@@ -23,11 +25,15 @@ export function AdvisorSelectorModal({
   propertyTitle,
   propertyPrice,
 }: AdvisorSelectorModalProps) {
+  const { locale } = useLocale()
+  const m = dict.modal
+  const c = dict.contact
+
   const buildWhatsAppUrl = (phone: string, advisor: string) => {
     const context = propertyTitle
       ? ` sobre "${propertyTitle}"${propertyPrice ? ` (${propertyPrice})` : ''}`
       : ''
-    const message = `Hola ${advisor}, quiero recibir asesoría inmobiliaria${context}.`
+    const message = `${c.whatsappSaludo[locale]} ${advisor === 'Wendy' ? 'Wendy' : 'José Luis'}, ${locale === 'en' ? 'I would like real-estate advice' : 'quiero recibir asesoría inmobiliaria'}${context}.`
     return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`
   }
 
@@ -47,12 +53,12 @@ export function AdvisorSelectorModal({
       <DialogContent className="sm:max-w-md rounded-2xl border border-border p-6 shadow-2xl bg-background">
         <DialogHeader className="text-center sm:text-center space-y-2">
           <DialogTitle className="text-2xl font-bold tracking-tight">
-            Equipo
+            {m.titulo[locale]}
           </DialogTitle>
           <DialogDescription className="text-xs text-muted-foreground">
             {propertyTitle
-              ? `¿Con quién deseas consultar sobre "${propertyTitle}"?`
-              : 'Selecciona con quién deseas comunicarte vía WhatsApp para una atención personalizada.'}
+              ? `${m.conProp[locale]} "${localizePropertyTitle(propertyTitle, locale)}"?`
+              : m.general[locale]}
           </DialogDescription>
         </DialogHeader>
 
@@ -62,14 +68,14 @@ export function AdvisorSelectorModal({
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => handleSelectAdvisor('Wendy Sánchez')}
-            className="block rounded-xl border border-border bg-secondary/40 p-4 text-left no-underline transition-colors hover:bg-foreground/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            className="block rounded-xl border-0 bg-foreground/10 p-4 text-left no-underline backdrop-blur-sm transition-colors hover:bg-foreground/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           >
             <div className="font-bold text-base text-foreground">Wendy Sánchez</div>
             <div className="mt-1 text-xs text-muted-foreground">
-              Asesora Inmobiliaria | Licenciada INAPIM y especialista en Certeza Jurídica
+              {m.wendyRole[locale]}
             </div>
             <div className="mt-2 text-xs font-semibold text-foreground">
-              Consultar por WhatsApp
+              {m.consultar[locale]}
             </div>
           </a>
 
@@ -78,14 +84,14 @@ export function AdvisorSelectorModal({
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => handleSelectAdvisor('José Luis')}
-            className="block rounded-xl border border-border bg-secondary/40 p-4 text-left no-underline transition-colors hover:bg-foreground/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            className="block rounded-xl border-0 bg-foreground/10 p-4 text-left no-underline backdrop-blur-sm transition-colors hover:bg-foreground/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           >
             <div className="font-bold text-base text-foreground">José Luis</div>
             <div className="mt-1 text-xs text-muted-foreground">
-              Asesor Inmobiliario | Estrategias Patrimoniales y Administrativas
+              {m.joseRole[locale]}
             </div>
             <div className="mt-2 text-xs font-semibold text-foreground">
-              Consultar por WhatsApp
+              {m.consultar[locale]}
             </div>
           </a>
         </div>

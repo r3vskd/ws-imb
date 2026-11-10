@@ -38,7 +38,7 @@ interface TestimonialMessageProps {
 
 const TestimonialMessage = ({ message, children }: TestimonialMessageProps) => {
   return (
-    <div className="bg-neutral-50 dark:bg-neutral-700 border border-neutral-400/20 border-dashed rounded-md p-4 shadow-2xs flex flex-col gap-2">
+    <div className="bg-transparent dark:bg-neutral-700 border-2 border-neutral-400/60 border-dashed rounded-md p-4 flex flex-col gap-2 dark:border dark:border-neutral-400/20">
       <p className="text-sm text-neutral-700 dark:text-neutral-300 leading-5">
         {message}
       </p>
@@ -69,7 +69,7 @@ export const TestimonialCard = ({
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className={cn(
-        "w-full sm:max-w-sm p-2 bg-neutral-100 dark:bg-neutral-800 rounded-xl flex gap-2 cursor-pointer hover:scale-[1.02] transition-transform duration-200 ease-out",
+        "w-full sm:max-w-sm p-2 bg-white/30 backdrop-blur-md border border-border hover:border-foreground/30 dark:border-0 dark:bg-neutral-800 dark:backdrop-blur-none rounded-xl flex gap-2 cursor-pointer hover:scale-[1.02] transition-all duration-300 ease-out",
         hovered ? "flex-col-reverse" : "flex-col",
       )}
     >

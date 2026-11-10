@@ -8,3 +8,5 @@
 - Wants buttons across the site to be visually identical to one agreed reference button, hover state included ("should be identical (including on-hover) as the Consultar por WhatsApp buttons"), rather than each section having its own hand-rolled button style. Confidence: 0.7
 - Dislikes always-on/idle animations on interactive elements: animations should only run on hover/focus ("remove the animation of the 3 buttons, just preserve intact the onhover animation/effect"). Confidence: 0.6
 - Wants section background transitions to dissolve smoothly into each other (faded top/bottom edges, no perceptible abrupt color/tone division) while keeping the granulated/noise texture of each background. Confidence: 0.6
+- Prefers buttons and nav links with no borders and a transparent background — the subtle background tint should appear only on hover, and any existing text/icon hover animation must be kept. Confidence: 0.7
+- Wants the navbar fully transparent at the top of the page and only gaining its blurred/tinted background once the page is scrolled; in light mode the text and icons must turn white while in that top-transparent state. Confidence: 0.6

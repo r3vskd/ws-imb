@@ -2,11 +2,12 @@ import type { Metadata } from 'next'
 import { Analytics } from '@vercel/analytics/next'
 import { MetaPixel } from '@/components/analytics/meta-pixel'
 import { ThemeProvider } from '@/components/theme-provider'
+import { LocaleProvider } from '@/lib/i18n'
 import './globals.css'
 
 export const metadata: Metadata = {
   title: 'WS Asesoría Inmobiliaria | Mérida, Yucatán',
-  description: 'Asesoría profesional independiente en compra, venta y renta de propiedades en las mejores zonas de Mérida, Yucatán. Solana Residencial, Dzityá, Temozón y Norte de Mérida.',
+  description: 'Más que encontrar una propiedad, construimos relaciones que perduran.',
   generator: 'WS Asesoría Inmobiliaria',
   icons: {
     icon: '/ws-logo.png',
@@ -27,9 +28,11 @@ export default function RootLayout({
           enableSystem={false}
           storageKey="ws-theme"
         >
-          <MetaPixel />
-          {children}
-          <Analytics />
+          <LocaleProvider>
+            <MetaPixel />
+            {children}
+            <Analytics />
+          </LocaleProvider>
         </ThemeProvider>
       </body>
     </html>

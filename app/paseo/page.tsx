@@ -111,7 +111,7 @@ export default function PaseoPage() {
               </p>
               <Button
                 asChild
-                className="group h-9 w-fit rounded-md border border-white/30 bg-white/10 px-4 text-xs font-semibold text-white backdrop-blur-sm hover:bg-white/20"
+                className="group h-9 w-fit rounded-md border-0 bg-white/10 px-4 text-xs font-semibold text-white backdrop-blur-sm hover:bg-white/20"
               >
                 <Link href="/contact" className="no-underline">
                   Solicitar informes
