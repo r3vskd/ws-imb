@@ -237,7 +237,7 @@ export default function HomePage() {
         <HeroMorph />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0F1012] via-[#0F1012]/75 to-[#0F1012]/45 backdrop-blur-[2px]" />
 
-        <BlurIn className="relative container mx-auto px-4 text-center text-white py-20">
+        <BlurIn className="relative container mx-auto px-4 text-center text-white py-20 max-md:-translate-y-3">
 
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-6 tracking-tight leading-tight max-w-5xl mx-auto drop-shadow-md">
             {t.hero.title[locale]}
@@ -637,7 +637,7 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.15 }}
                 transition={{ duration: 0.5, delay: index * 0.06 }}
-                className={`group relative mb-3 min-h-[15rem] break-inside-avoid overflow-hidden rounded-xl sm:mb-4 ${
+                className={`group relative mb-3 min-h-[15rem] break-inside-avoid overflow-hidden rounded-xl sm:mb-4 max-md:aspect-auto ${
                   PROPERTY_CARD_ASPECTS[index % PROPERTY_CARD_ASPECTS.length]
                 }`}
               >

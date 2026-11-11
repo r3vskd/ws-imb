@@ -668,6 +668,6 @@ html:not(.dark) .shiny-cta-link {
 
 @media (max-width: 768px) {
   .hero-scroll {
-    bottom: 5.5rem;
+    bottom: calc(0.75rem + env(safe-area-inset-bottom));
   }
 }

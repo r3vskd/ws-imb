@@ -84,7 +84,7 @@ function PropertyCard({ property }: { property: Property }) {
     <>
       <motion.article
         variants={fadeInUp}
-        className="group relative aspect-[4/3] min-h-[19rem] overflow-hidden rounded-xl"
+        className="group relative aspect-[4/3] min-h-[19rem] overflow-hidden rounded-xl max-md:aspect-auto"
       >
         <img
           src={
